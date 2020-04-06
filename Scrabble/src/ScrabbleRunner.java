@@ -12,7 +12,6 @@ public class ScrabbleRunner extends Application{
 		
 		GUI gameUI = new GUI();
 		gameUI.start(gameWindow);
-		
 	}
 
 }
