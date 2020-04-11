@@ -1,0 +1,26 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class GUI extends Application{
+	
+	public static void main(String[] args) {
+		launch (args);
+	}
+	
+	@Override
+	public void start(Stage gameWindow) throws Exception {
+		Button button1 = new Button("Hello~!");
+		
+		StackPane layout = new StackPane();
+		layout.getChildren().add(button1);
+		
+		Scene scene = new Scene(layout,500,800);
+		gameWindow.setScene(scene);
+		gameWindow.show();
+		
+	}
+	
+}

@@ -1,0 +1,8 @@
+2020-04-05 17:38:24,356 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-04-05 17:38:51,183 [ForkJoinPool.commonPool-worker-19] WARN  org.eclipse.jgit.util.FS - locking FileBasedConfig[C:\Users\Dinas\.config\jgit\config] failed after 5 retries
+2020-04-05 18:27:52,741 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-04-06 15:58:52,801 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-04-06 15:58:59,790 [ForkJoinPool.commonPool-worker-19] WARN  org.eclipse.jgit.util.FS - locking FileBasedConfig[C:\Users\Dinas\.config\jgit\config] failed after 5 retries
+2020-04-06 18:03:07,672 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-04-08 11:21:01,684 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-04-11 12:14:19,929 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
