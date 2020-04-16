@@ -1,4 +1,4 @@
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -11,7 +11,7 @@ public class Dictionary {
     
     public Dictionary() {
         dictionaryWordList = new ArrayList<String>();
-        //Need to read the dictionary words from the dictionary.txt file
+        //Need to read the dictionary words from the CollinsScrabbleWords2019.txt file
 
 
         private ArrayList<String> dictionaryWordsAsList;
@@ -28,11 +28,11 @@ public class Dictionary {
         public void createAndCopyDictionaryToArray() {
 
             // Create object for file
-            File dictionaryFile = new File("dictionary.txt");
+            File dictionaryFile = new File("CollinsScrabbleWords2019.txt");
 
             // Read in dictionary from
             try (BufferedReader br = new BufferedReader(
-                    new FileReader("dictionary.txt"))) {
+                    new FileReader("CollinsScrabbleWords2019.txt"))) {
 
                 String wordLine = br.readLine();
 
