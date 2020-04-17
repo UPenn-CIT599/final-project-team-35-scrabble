@@ -7,17 +7,9 @@ import java.util.*;
  *
  */
 public class Dictionary {
-    private ArrayList<String> dictionaryWordList;
-    
-    public Dictionary() {
-        dictionaryWordList = new ArrayList<String>();
-        //Need to read the dictionary words from the CollinsScrabbleWords2019.txt file
+    private ArrayList<String> dictionaryWordsAsList;
 
 
-        private ArrayList<String> dictionaryWordsAsList;
-/**
- * Creates dictionary object
- */
 	public Dictionary() {
             this.dictionaryWordsAsList = new ArrayList<>();
         }
@@ -72,5 +64,3 @@ public class Dictionary {
             System.out.println(dictionary.getDictionaryWordsAsList());
         }
     }
-
-}
