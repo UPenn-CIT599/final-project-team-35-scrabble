@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,6 +25,11 @@ import javafx.stage.Stage;
  */
 public class GUI extends Application{
     
+	public static final int TILE_SIZE = 50;
+	public static final int ROW = 15;
+	public static final int COL = 15;
+	
+	private Group tileGroup = new Group();
     int option; 
 
     
@@ -53,10 +60,14 @@ public class GUI extends Application{
         Button pause = new Button("Pause");
         Button resume = new Button("Resume");
         Button restart = new Button("Restart");
+        
+        //Build a timer
+        
+        
         topMenu.getChildren().addAll(pause, resume, restart);
         
         //Create a right menu for display scores and letters
-        GridPane rightMenu = new GridPane();
+        GridPane rightMenu = new GridPane(); 
         rightMenu.setHgap(10);
         rightMenu.setVgap(10);
         rightMenu.setPadding(new Insets(10,10,10,50));
@@ -67,13 +78,14 @@ public class GUI extends Application{
         rightMenu.add(letterLabel, 0, 1);
         
         //Create a game board
-        GridPane gameBoard = new GridPane();
+        CreateGameBoard();
         
         
         BorderPane singleGameLayout = new BorderPane();
         singleGameLayout.setTop(topMenu);
         singleGameLayout.setRight(rightMenu);
-        Scene singleGameScene = new Scene(singleGameLayout,800,800);
+        singleGameLayout.setCenter(CreateGameBoard());
+        Scene singleGameScene = new Scene(singleGameLayout,1000,1000);
         
         
         //If the player chooses single player mode
@@ -97,5 +109,22 @@ public class GUI extends Application{
         
     }
     
+    public Pane CreateGameBoard() {
+    	Pane gameBoard = new Pane();
+    	gameBoard.setPrefSize(COL * TILE_SIZE, ROW * TILE_SIZE);
+    	
+    	for (int y = 0; y < ROW; y++) {
+    		for (int x = 0; x < COL; x++) {
+    			
+    			//Add code for decide what status this tile is
+    			Tile tile = new Tile(0, x, y);
+    			tileGroup.getChildren().add(tile);
+    		}
+    	}
+    	
+    	gameBoard.getChildren().addAll(tileGroup);
+    	
+    	return gameBoard;
+    }
     
 }
