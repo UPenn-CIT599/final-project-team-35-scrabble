@@ -1,3 +1,5 @@
+package GUI;
+
 import java.io.FileInputStream;
 
 import javafx.application.Application;
@@ -30,7 +32,7 @@ public class GUI extends Application{
 	public static final int COL = 15;
 	
 	private Group tileGroup = new Group();
-	private Group letterGroup = new Group();
+	private Group letterTileGroup = new Group();
     int option; 
 
     
@@ -130,8 +132,7 @@ public class GUI extends Application{
     	StackPane gameBoard = new StackPane();
     	gameBoard.setPrefSize(COL * TILE_SIZE, ROW * TILE_SIZE);
     	
-    	//make game tiles
-    	for (int y = 0; y < ROW; y++) {
+    	for (int y = 0; y < ROW-2; y++) {
     		if (y < ROW-2) {
     			for (int x = 0; x < COL; x++) {
         			
@@ -139,29 +140,20 @@ public class GUI extends Application{
         			Tile tile = new Tile(0, x, y);
         			tileGroup.getChildren().add(tile);
         		}
-    			
-    		//make letter rack tiles	
     		}else if (y == ROW-1) {
     			for (int i = 4; i < 11; i++) {
-    				Tile tile = new Tile(9, i, y);
+    				Tile tile = new Tile(0, i, y);
         			tileGroup.getChildren().add(tile);
-        			Label letter = new Label("A");
-        			letter.relocate(i * TILE_SIZE, TILE_SIZE);
-//        			LetterLabel l = makeLetter("A", i, y);
-//        			tile.setLetter(l);
-        			letterGroup.getChildren().add(letter);
     	    	}
     		}
     	}
-    	gameBoard.getChildren().addAll(tileGroup, letterGroup);
+    	gameBoard.getChildren().addAll(tileGroup,letterTileGroup);
     	
     	return gameBoard;
     }
     
-    public LetterLabel makeLetter(String l, int x, int y) {
-    	LetterLabel letter = new LetterLabel(l, x, y);
+    public void makeLetterTile() {
     	
-    	return letter;
     }
     
     /*

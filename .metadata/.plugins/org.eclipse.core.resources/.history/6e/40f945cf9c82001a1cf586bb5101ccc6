@@ -1,11 +1,10 @@
-
+package GUI;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Tile extends Rectangle{
 	
-	private LetterLabel letter;
 	/*
 	 * There are 5 status for the tile:
 	 * 0 means normal tile, no bonus points
@@ -40,13 +39,4 @@ public class Tile extends Rectangle{
 		}
 		
 	}
-	
-	public boolean hasLetter() {
-		return false;
-	}
-	
-	public void setLetter(LetterLabel letter) {
-		this.letter = letter;
-	}
-
 }

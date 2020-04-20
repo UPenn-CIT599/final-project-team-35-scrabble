@@ -1,0 +1,14 @@
+
+import javafx.scene.control.Label;
+
+public class LetterLabel extends Label{
+	
+	
+	public LetterLabel(String l, int x, int y) {
+	
+		Label letter = new Label(l);
+		relocate(x * GUI.TILE_SIZE, y * GUI.TILE_SIZE);
+//		letter.setTranslateX(x * GUI.TILE_SIZE);
+//		letter.setTranslateY(y * GUI.TILE_SIZE);
+	}
+}

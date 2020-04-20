@@ -145,22 +145,19 @@ public class GUI extends Application{
     			for (int i = 4; i < 11; i++) {
     				Tile tile = new Tile(9, i, y);
         			tileGroup.getChildren().add(tile);
-        			Label letter = new Label("A");
-        			letter.relocate(i * TILE_SIZE, TILE_SIZE);
-//        			LetterLabel l = makeLetter("A", i, y);
-//        			tile.setLetter(l);
-        			letterGroup.getChildren().add(letter);
+        			LetterLabel l = makeLetter("A", i, y);
+        			tile.setLetter(l);
+        			letterGroup.getChildren().add(letter1);
     	    	}
     		}
     	}
-    	gameBoard.getChildren().addAll(tileGroup, letterGroup);
+    	gameBoard.getChildren().addAll(tileGroup,letterGroup);
     	
     	return gameBoard;
     }
     
     public LetterLabel makeLetter(String l, int x, int y) {
     	LetterLabel letter = new LetterLabel(l, x, y);
-    	
     	return letter;
     }
     
