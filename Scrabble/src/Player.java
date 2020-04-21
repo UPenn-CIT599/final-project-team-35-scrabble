@@ -6,42 +6,48 @@ import java.util.*;
  *
  */
 public class Player {
+    private String name;
     private int totalScore = 0;
     private ArrayList<Integer> wordScores;
     private HashMap<Integer, ArrayList<String>> wordSelectionsPerTurn;
     private int numLettersToReplace;
-    private ArrayList<String> currentLetterTray;    
-    private ArrayList<String> newLetterTray;
-    private ArrayList<String> newLetters;    
+    private ArrayList<Letter> currentLetterTray;    
+    //private ArrayList<Letter> newLetterTray;
+    private ArrayList<Letter> newLetters;    
     
     /**
      * Constructor for Player
-     */
-    public Player(int numTurn, int updatedScore, int wordScore, ArrayList<String> words) {
+     */ /*
+    public Player(String playerName, int numTurn, int updatedScore, int wordScore, ArrayList<String> words) {
+        name = playerName;        
         wordSelectionsPerTurn = new HashMap<>();
         wordScores = new ArrayList<Integer>();
         totalScore += updatedScore;
         wordScores.add(wordScore);   
+        if (!words.equals()) {
+            
+        }
         wordSelectionsPerTurn.put(numTurn, words); 
         currentLetterTray = new ArrayList<String>();
         newLetterTray = new ArrayList<String>();        
+    } */
+    
+    public Player(String playerName) { 
+        name = playerName;
+        currentLetterTray = new ArrayList<Letter>();
     }
     
     /**
      * method for updating (or replacing) Player's current letter Tray with a new Tray of Letters
      */
-    public ArrayList<String> newTrayOfLetters(boolean replaceFullTray, int numLettersToReplace, ArrayList<String> currentLetters, ArrayList<String> newLetters) {
-        numLettersToReplace = numLettersToReplace;
-        newLetterTray.clear();
-        newLetterTray.addAll(currentLetters);
+    public ArrayList<Letter> trayOfLetters(boolean replaceFullTray, ArrayList<Letter> newLetters) {          
         if (replaceFullTray) {
             numLettersToReplace = 7;
-            newLetterTray.clear();            
+            currentLetterTray.clear();            
         }
-        newLetterTray.addAll(newLetters);  
-        currentLetterTray.clear();
-        currentLetterTray.addAll(newLetterTray);            
-        return newLetterTray;        
+        currentLetterTray.addAll(newLetters);  
+           
+        return currentLetterTray;        
     }       
             
     /**
@@ -54,8 +60,22 @@ public class Player {
     /**
      * Getter method for returning current LetterTray of this Player
      */
-    public ArrayList<String> getCurrentLetterTray() {             
+    public ArrayList<Letter> getCurrentLetterTray() {             
         return currentLetterTray;        
+    }     
+    
+    /**
+     * Setter method for re-filling current LetterTray of this Player
+     */
+    public void setCurrentLetterTray(ArrayList<Letter> letterTray) {             
+        currentLetterTray = letterTray;        
+    }     
+    
+    /**
+     * Getter method for returning name of this Player
+     */
+    public String getName() {             
+        return name;        
     }      
 
 }

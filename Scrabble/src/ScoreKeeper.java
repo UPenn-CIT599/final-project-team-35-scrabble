@@ -45,7 +45,8 @@ public class ScoreKeeper {
      * Getter method to get the scores of All Players 
      * @return
      */
+    //public ArrayList<Integer> getPlayerScores() {    
     public HashMap<String, Integer> getPlayerScores() {
         return playerScores;
-    }   
+    }       
 }

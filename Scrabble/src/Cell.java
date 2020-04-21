@@ -1,77 +1,87 @@
 /**
- * This is the Cell class, holding a position and potentially a letter
+ * This is the Cell class, holding all positions and letters from a row
  * The variables define the value of each Cell object 
  * @author CIT-591 Team-35 Project
  *
  */
 public class Cell {
-    private int cellPosition; 
-    private String cellValue;
-    /*
-    private boolean start; //if start = true, this is the STAR cell used to start Scrabble Play      
-    private boolean doubleLetter;
-    private boolean tripleLetter;      
-    private boolean quadrupleLetter;     
-    private boolean doubleWord;
-    private boolean tripleWord;   
-    private boolean quadrupleWord;  
-    */ 
-
-    //private Letter letter;
+    private int position; 
+    //private int cellLetterValue;
+    //private int cellWordValue;  
+    private String posValue;
+    private Letter letter;
+    private boolean positionTaken;
     
     /**
      * Constructor
      * @param position
      */
-    public Cell(int position, boolean start, boolean doubleLetter, boolean tripleLetter, boolean quadrupleLetter,
-            boolean doubleWord, boolean tripleWord, boolean quadrupleWord) {
+    public Cell(int position, String cellValue) {    
+    //public Cell(int position, int letterValue, int wordValue) {
+        this.position = position;      
+        //cellLetterValue = letterValue;
+        //cellWordValue = wordValue;  
+        posValue = cellValue;
+        positionTaken = false;
+    }
+       
+    /**
+     * Getter method for position
+     * @return
+     */
+    public int getPosition() {
+        return position;
+    }
+    
+    /**
+     * Getter method for card.
+     * @return
+     */
+    public Letter getLetter() {
+        return letter;
+    }
+    
+    /**
+     * Setter method for card.
+     */
+    public void setLetter(Letter L) {
+        letter = L;        
+    }
+    
+    /**
+     * Setter method for positionTaken.
+     */
+    public void setPositionTaken(boolean posTaken) {
+        positionTaken = posTaken;        
+    }    
+    
+    /**
+     * Returns a letter if there is one, otherwise returns the position
+     * @return
+     */
+    public String getCellValues() {
+    //public String[] getCellValues() {        
         /*
-        this.cellPosition = position;
-        this.start = start;
-        this.doubleLetter = doubleLetter;
-        this.tripleLetter = tripleLetter;
-        this.quadrupleLetter = quadrupleLetter;
-        this.doubleWord = doubleWord;
-        this.tripleWord = tripleWord;
-        this.quadrupleWord = quadrupleWord;   
-        */
-        
-        if (start) {
-            cellValue = "StartCell";
-        }
-        if (doubleLetter) {
-            cellValue = "DoubleLetter";
-        }
-        if (tripleLetter) {
-            cellValue = "TripleLetter";
-        }
-        if (quadrupleLetter) {
-            cellValue = "QuadrupleLetter";
-        }
-        if (doubleWord) {
-            cellValue = "DoubleWord";
-        }
-        if (tripleWord) {
-            cellValue = "TripleWord";
-        }
-        if (quadrupleWord) {
-            cellValue = "QuadrupleWord";
-        }        
+        String[] cellValues = new String[3];
+        if (letter != null) {
+            String name = letter.getLetterName();
+            int valueOfLetter = letter.getLetterScore();
+            //int letterValueOfPosition = cellLetterValue;
+            //int wordValueOfPosition = cellWordValue;            
+            cellValues[0] = name + valueOfLetter;
+            if (positionTaken) {
+                cellValues[1] = Integer.toString(1) + ""; 
+                cellValues[2] = Integer.toString(1) + "";                
+            } else {
+                cellValues[1] = Integer.toString(cellLetterValue) + ""; 
+                cellValues[2] = Integer.toString(cellWordValue) + "";                  
+            }                     
+        } else {            
+            cellValues[0] = "00";            
+            cellValues[1] = Integer.toString(cellLetterValue) + ""; 
+            cellValues[2] = Integer.toString(cellWordValue) + "";   
+        }      
+        return cellValues; */
+        return posValue;
     }
-    
-    /**
-     * Getter method for Cell position.
-     * @return
-     */
-    public int getCellPosition() {
-        return cellPosition;
-    }
-    
-    /**
-     * Getter method for letter value.
-     * @return
-     */
-    public String getCellValue() {
-        return cellValue;
-    }     
 }
