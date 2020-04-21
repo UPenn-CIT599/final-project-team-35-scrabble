@@ -1,0 +1,202 @@
+@font-face {
+    src: url("../Fonts/Lato-Regular.ttf");
+
+}
+
+#baseAnchor {
+    -fx-background-color: #126B40;
+}
+
+.gradiantGeneral {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #278A5B, #126B40);
+}
+
+.gradiantMT {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #FD5B78, #C7031E);
+}
+
+.gradiantLT {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #93CCEA, #6093D1);
+}
+
+.gradiantMD {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #E8B9B3, #ED989E);
+}
+
+.gradiantLD {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #BAEEF9, #6CDAE7);
+}
+
+/*Hover case*/
+.gradiantGeneral:hover {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #27765b, #125740);
+}
+
+.gradiantMT:hover{
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #e95b78, #b3031e);
+}
+
+.gradiantLT:hover {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #93ccd6, #6093bd);
+}
+
+.gradiantMD:hover {
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #e8a5b3, #d9989e);
+}
+
+.gradiantLD:hover{
+    -fx-background-color: radial-gradient(focus-distance 0%, center 50% 50%, radius 65%, #baeee5, #6cdad3);
+}
+
+
+*.label {
+    -fx-text-fill: #25272C;
+}
+
+.invisible {
+    -fx-opacity: 0.0;
+}
+
+.mainBoard {
+    -fx-background-color: #34495e;
+}
+
+#PasserouJouer {
+    -fx-background-image: url('../Button/squareBtnValider.png');
+    -fx-background-size: 64px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+#PasserouJouer:pressed {
+    -fx-background-image: url('../Button/squareBtnValiderDown.png');
+}
+
+#pioche {
+    -fx-background-image: url('../pioche_2_256.png');
+    -fx-background-size: 64px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+
+}
+
+#pioche:hover {
+    -fx-background-image: url('../pioche_256.png');
+}
+
+#pioche:pressed {
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+#shuffleBtn {
+    -fx-background-image: url('../Button/shuffle.png');
+    -fx-background-size: 64px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+#shuffleBtn:pressed {
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+#swapRecallBtn {
+    -fx-background-size: 64px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: bottom;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+}
+
+.swapImg{
+    -fx-background-image: url('../Button/swap.png');
+}
+.recallImg{
+    -fx-background-image: url('../Button/recall.png');
+}
+
+#swapRecallBtn:pressed {
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+.GreenButton {
+    -fx-background-image: url('../Button/textButton.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-font: 23 Lato;
+    -fx-text-fill: #ecf0f1;
+    -fx-text-alignment: center;
+    -fx-pref-width: 195;
+    -fx-pref-height: 49;
+    -fx-min-width: 195;
+    -fx-min-height: 49;
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+    -fx-background-color: transparent;
+    -fx-focus-color: transparent;
+
+}
+
+.GreenButton:pressed {
+    -fx-background-image: url('../Button/textButtonDown.png');
+}
+
+#menu {
+    -fx-background-color: #34495e;
+
+}
+
+#menu .label {
+    -fx-text-fill: #ecf0f1;
+}
+
+#dialogContent {
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+    -fx-background-color: #ecf0f1;
+}
+
+.buttonLetter {
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: contain;
+    -fx-focus-color: transparent;
+    -fx-background-color: transparent;
+    -fx-smooth: true;
+}
+
+.scoreBoard {
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+    -fx-border-color: black;
+    -fx-border-insets: 5%;
+    -fx-background-color: #95a5a6;
+
+}
+
+.scoreBoardHighlight {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+
+}
+
+.scoreBoard Text {
+    -fx-fill: white;
+    -fx-font-size: 24px;
+}
+
+.overlayPiece{
+    -fx-blend-mode: color-dodge;
+}
+
+.overlayEchanger{
+    -fx-blend-mode: color-dodge;
+}
