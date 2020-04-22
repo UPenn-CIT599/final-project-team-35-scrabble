@@ -11,6 +11,8 @@ public class Cell {
     private String posValue;
     private Letter letter;
     private boolean positionTaken;
+    private String verticalWord;
+    private String horizontalWord;
     
     /**
      * Constructor
@@ -49,11 +51,46 @@ public class Cell {
     }
     
     /**
+     * Getter method for positionTaken.
+     */
+    public boolean getPositionTaken() {
+        return positionTaken;        
+    }     
+    
+    /**
      * Setter method for positionTaken.
      */
     public void setPositionTaken(boolean posTaken) {
         positionTaken = posTaken;        
-    }    
+    }  
+    
+    /**
+     * Getter method for verticalWord.
+     */
+    public String getVerticalWord() {
+        return verticalWord;        
+    }     
+    
+    /**
+     * Setter method for verticalWord.
+     */
+    public void setVerticalWord(String vertWord) {
+        verticalWord = vertWord;        
+    }  
+    
+    /**
+     * Getter method for horizontalWord.
+     */
+    public String getHorizontalWord() {
+        return horizontalWord;        
+    }     
+    
+    /**
+     * Setter method for horizontalWord.
+     */
+    public void setHorizontalWord(String horWord) {
+        horizontalWord = horWord;        
+    }      
     
     /**
      * Returns a letter if there is one, otherwise returns the position

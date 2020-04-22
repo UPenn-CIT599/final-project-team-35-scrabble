@@ -13,7 +13,8 @@ public class Player {
     private int numLettersToReplace;
     private ArrayList<Letter> currentLetterTray;    
     //private ArrayList<Letter> newLetterTray;
-    private ArrayList<Letter> newLetters;    
+    private ArrayList<Letter> newLetters; 
+    private int errorChancesPerTurn;
     
     /**
      * Constructor for Player
@@ -35,6 +36,7 @@ public class Player {
     public Player(String playerName) { 
         name = playerName;
         currentLetterTray = new ArrayList<Letter>();
+        errorChancesPerTurn = 0;
     }
     
     /**
@@ -76,6 +78,21 @@ public class Player {
      */
     public String getName() {             
         return name;        
-    }      
+    }    
+    
+    /**
+     * Getter method for returning number of Errors already allowed (for current Turn) for this Player
+     */
+    public int getErrorChancesPerTurn() {             
+        return errorChancesPerTurn;        
+    }     
+    
+    /**
+     * Setter method for assigning number of Errors given for this Player, for current Turn
+     */
+    public void setErrorChancesPerTurn(int errors) {             
+        errorChancesPerTurn = errors;        
+    }       
+    
 
 }

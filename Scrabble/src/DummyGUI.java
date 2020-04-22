@@ -23,7 +23,7 @@ public class DummyGUI {
     private boolean playerEvent;
     private boolean trayRefillEvent;
     private boolean boardNewWordsEvent;
-    private ArrayList<String[]> newBoardPositions;
+    private ArrayList<Integer> newBoardPositions;
     private ArrayList<String> newBoardLetters;   
     private boolean wordsError;
        
@@ -33,7 +33,7 @@ public class DummyGUI {
     public DummyGUI() {
         //eventOptionButton = 1;  
         playerNames = new ArrayList<>();
-        newBoardPositions = new ArrayList<String[]>();
+        newBoardPositions = new ArrayList<Integer>();
         newBoardLetters = new ArrayList<String>(); 
         wordsError = false;
         endGame = false;
@@ -112,7 +112,7 @@ public class DummyGUI {
         currentPlayerName = name;
     }
     
-    public ArrayList<String[]> getNewBoardPositions() {
+    public ArrayList<Integer> getNewBoardPositions() {
         return newBoardPositions;
     }
     

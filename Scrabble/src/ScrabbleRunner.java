@@ -56,7 +56,7 @@ public class ScrabbleRunner {
                     game.playEvent(gameUI.getNewBoardPositions(), gameUI.getNewBoardLetters());
                     gameUI.setBoardNewWordsEvent(false);                      
                     //game.checkWords();
-                    errorFlag = game.checkError();
+                    errorFlag = game.getNewWordsError(); //checkError();
                     gameUI.setWordsError(errorFlag);     
                     gameUI.displayScrabbleBoard(game.getDisplay());
                     gameUI.displayCurrentTray(game.getCurrentPlayer().getCurrentLetterTray());
@@ -64,11 +64,12 @@ public class ScrabbleRunner {
                     gameUI.setNewBoardLetters();    
                     gameUI.setPlayerScores(game.scoreKeeper.getPlayerScores());  
                     
-                    if (!errorFlag) {
+                    /*if (!errorFlag) {
                         game.changePlayer();
                     } else {
                         //game.changePlayer();    //NOTE: This condition Only if we want the current Player to redo the letters on the Board due to the error!                    
-                    }
+                    } */
+                    
                     gameUI.setWordsError(false); //resetting errorFlag                      
                     gameUI.setPlayerEvent(false);       
                     gameUI.setCurrentPlayer(game.getCurrentPlayer().getName());                       

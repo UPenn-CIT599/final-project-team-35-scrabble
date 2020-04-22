@@ -23,7 +23,7 @@ public class Board {
     private Cell[] r13;
     private Cell[] r14;    
     
-    private ArrayList<Cell[]> scrabbleRows;
+    private ArrayList<Cell[]> scrabbleRows;   
     
     /**
      * Constructor for Board
@@ -81,60 +81,28 @@ public class Board {
         
         if ((i == 0) || (i == 7) || (i == 14)) {
             if (i == 7) {
-                /*int[] letterValues = {1, 1, 1, 2, 1, 1, 1, startPositionValue, 1, 1, 1, 2, 1, 1, 1};
-                int[] wordValues   = {3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3}; 
-                thisLetterValues = letterValues;
-                thisWordValues   = wordValues;  */  
                 String[] cellValues   = {"TW", "BL", "BL", "DL", "BL", "BL", "BL", "ST", "BL", "BL", "BL", "DL", "BL", "BL","TW"}; 
                 thisValues = cellValues;                
             } else {
-                /*int[] letterValues = {1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1};
-                int[] wordValues   = {3, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 3}; 
-                thisLetterValues = letterValues;
-                thisWordValues   = wordValues;  */
                 String[] cellValues   = {"TW", "BL", "BL", "DL", "BL", "BL", "BL", "TW", "BL", "BL", "BL", "DL", "BL", "BL","TW"}; 
                 thisValues = cellValues;                
             }                                                         
         } else if ((i == 1) || (i == 13)) {  
-            /*int[] letterValues = {1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 1, 1};
-            int[] wordValues   = {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1};  
-            thisLetterValues = letterValues;
-            thisWordValues   = wordValues; */
             String[] cellValues   = {"BL", "DW", "BL", "BL", "BL", "TL", "BL", "BL", "BL", "TL", "BL", "BL", "BL", "DW","BL"}; 
             thisValues = cellValues;            
         } else if ((i == 2) || (i == 12)) {
-            /*int[] letterValues = {1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1};
-            int[] wordValues   = {1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1};  
-            thisLetterValues = letterValues;
-            thisWordValues   = wordValues;  */
             String[] cellValues   = {"BL", "BL", "DW", "BL", "BL", "BL", "DL", "BL", "DL", "BL", "BL", "BL", "DW", "BL","BL"}; 
             thisValues = cellValues;            
         } else if ((i == 3) || (i == 11)) {
-            /*int[] letterValues = {2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2};
-            int[] wordValues   = {1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1};   
-            thisLetterValues = letterValues;
-            thisWordValues   = wordValues;  */
             String[] cellValues   = {"DL", "BL", "BL", "DW", "BL", "BL", "BL", "DL", "BL", "BL", "BL", "DW", "BL", "BL","DL"}; 
             thisValues = cellValues;            
         } else if ((i == 4) || (i == 10)) {
-            /*int[] letterValues = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-            int[] wordValues   = {1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1};      
-            thisLetterValues = letterValues;
-            thisWordValues   = wordValues;  */
             String[] cellValues   = {"BL", "BL", "BL", "BL", "DW", "BL", "BL", "BL", "BL", "BL", "DW", "BL", "BL", "BL","BL"}; 
             thisValues = cellValues;            
         } else if ((i == 5) || (i == 9)) {
-            /*int[] letterValues = {1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1};
-            int[] wordValues   = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};   
-            thisLetterValues = letterValues;
-            thisWordValues   = wordValues;    */
             String[] cellValues   = {"BL", "TL", "BL", "BL", "BL", "TL", "BL", "BL", "BL", "TL", "BL", "BL", "BL", "TL","BL"}; 
             thisValues = cellValues;            
         } else if ((i == 6) || (i == 8)) {
-            /*int[] letterValues = {1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1};
-            int[] wordValues   = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};   
-            thisLetterValues = letterValues;
-            thisWordValues   = wordValues;   */
             String[] cellValues   = {"BL", "BL", "DL", "BL", "BL", "BL", "DL", "BL", "DL", "BL", "BL", "BL", "DL", "BL","BL"}; 
             thisValues = cellValues;            
         }   
@@ -153,24 +121,7 @@ public class Board {
         r11[column]  = new Cell(column, thisValues[11]); 
         r12[column]  = new Cell(column, thisValues[12]);         
         r13[column]  = new Cell(column, thisValues[13]); 
-        r14[column]  = new Cell(column, thisValues[14]);           
-        
-        /*
-        r0[column]   = new Cell(column, thisLetterValues[0],  thisWordValues[0]); 
-        r1[column]   = new Cell(column, thisLetterValues[1],  thisWordValues[1]);      
-        r2[column]   = new Cell(column, thisLetterValues[2],  thisWordValues[2]); 
-        r3[column]   = new Cell(column, thisLetterValues[3],  thisWordValues[3]);  
-        r4[column]   = new Cell(column, thisLetterValues[4],  thisWordValues[4]);         
-        r5[column]   = new Cell(column, thisLetterValues[5],  thisWordValues[5]); 
-        r6[column]   = new Cell(column, thisLetterValues[6],  thisWordValues[6]);      
-        r7[column]   = new Cell(column, thisLetterValues[7],  thisWordValues[7]); 
-        r8[column]   = new Cell(column, thisLetterValues[8],  thisWordValues[8]); 
-        r9[column]   = new Cell(column, thisLetterValues[9],  thisWordValues[9]); 
-        r10[column]  = new Cell(column, thisLetterValues[10], thisWordValues[10]);      
-        r11[column]  = new Cell(column, thisLetterValues[11], thisWordValues[11]); 
-        r12[column]  = new Cell(column, thisLetterValues[12], thisWordValues[12]);         
-        r13[column]  = new Cell(column, thisLetterValues[13], thisWordValues[13]); 
-        r14[column]  = new Cell(column, thisLetterValues[14], thisWordValues[14]);    */     
+        r14[column]  = new Cell(column, thisValues[14]);            
     }
     
     /**
@@ -181,38 +132,74 @@ public class Board {
     }    
     
     /**
+     * Setter to update the data for the current Board
+     */
+    public void setCurrentBoard(ArrayList<Cell[]> updatedBoard) {
+        scrabbleRows = updatedBoard;           
+    }       
+    
+    /**
      * This returns the cell at a given position in the given row
      * @param position
      * @return
-     */ /*
-    public Cell getCell(int row, int position) {
-        if (row < 0 || row > 14 || position < 0 || position > 14) {
-            return null;
-        } else if (position < 6) {
-            return r1[position - 1];            
-        } else if (position < 11) {
-            return r2[position - 6];
-        } else if (position < 14) {
-            return r3[position - 11];
-        } else if (position < 17) {
-            return r4[position - 14];
+     */ 
+    public Cell getCell(int position) {
+        if (position >= 0 && position < 15) { 
+            return r0[position];
+        } else if (position < 30) {
+            return r1[position - 15];            
+        } else if (position < 45) {
+            return r2[position - 30];
+        } else if (position < 60) {
+            return r3[position - 45];
+        } else if (position < 75) {
+            return r4[position - 60];
+        } else if (position < 90) {
+            return r5[position - 75];
+        } else if (position < 105) {
+            return r6[position - 90];
+        } else if (position < 120) {
+            return r7[position - 105];
+        } else if (position < 135) {
+            return r8[position - 120];
+        } else if (position < 150) {
+            return r9[position - 135];
+        } else if (position < 165) {
+            return r10[position - 150];
+        } else if (position < 180) {
+            return r11[position - 165];
+        } else if (position < 195) {
+            return r12[position - 180];
+        } else if (position < 210) {
+            return r13[position - 195];
+        } else if (position < 225) {
+            return r14[position - 210];            
         } else {
-            return discard[position - 17];
+            return null;
         }
-    } */
+    } 
     
     /**
-     * Returns true if the position holds a letter
+     * Returns true if the position holds a vertical Word associated with this Cell
      * @return
-     */ /*
-    public boolean contains(int position) {
+     */ 
+    public boolean containsLetter(int position) {
         return getCell(position).getLetter() != null;
-    }   */ 
+    }   
     
     /**
-     * Method for updating Current status of Board
-     */
-    public void currentBoard() {
-        
-    }
+     * Returns true if the position holds a vertical word
+     * @return
+     */ 
+    public boolean containsVerticalWord(int position) {
+        return getCell(position).getVerticalWord() != null;
+    }     
+    
+    /**
+     * Returns true if the position holds a horizontal word
+     * @return
+     */ 
+    public boolean containsHorizontalWord(int position) {
+        return getCell(position).getHorizontalWord() != null;
+    }     
 }
