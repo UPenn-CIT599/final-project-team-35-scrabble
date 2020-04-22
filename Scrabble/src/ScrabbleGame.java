@@ -207,6 +207,7 @@ public class ScrabbleGame {
                 }
             }
             currentPlayer.setErrorChancesPerTurn(0);
+            currentPlayer.setCurrentLetterTray(tempLetterTray);            
             newWordsError = false;            
             changePlayer();         
         }
