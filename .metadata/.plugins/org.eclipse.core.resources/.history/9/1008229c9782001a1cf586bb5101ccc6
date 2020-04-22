@@ -1,0 +1,26 @@
+package GUI;
+
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import static GUI.GUI.TILE_SIZE;
+
+public class LetterTile extends Rectangle{
+	
+	private double mouseX, mouseY;
+	private double oldX, oldY;
+	
+	public LetterTile(String l, int x, int y) {
+		
+		String letter = l.toUpperCase();
+		setHeight(TILE_SIZE * 0.5);
+		setWidth(TILE_SIZE * 0.5);
+		setFill(Color.valueOf("d8cecc"));
+		setStroke(Color.valueOf("000000"));
+		
+		relocate(x * TILE_SIZE, y * TILE_SIZE);
+		
+		
+		
+		
+	}
+}

@@ -26,11 +26,10 @@ import javafx.stage.Stage;
 public class GUI extends Application{
     
 	public static final int TILE_SIZE = 50;
-	public static final int ROW = 17;
+	public static final int ROW = 15;
 	public static final int COL = 15;
 	
 	private Group tileGroup = new Group();
-	private Group letterGroup = new Group();
     int option; 
 
     
@@ -108,14 +107,12 @@ public class GUI extends Application{
         
  
         BorderPane singleGameLayout = new BorderPane();
-        StackPane board = GameBoard();
-        HBox letterRack = LetterRack();
-        topMenu.setAlignment(Pos.CENTER);
-        board.setAlignment(Pos.CENTER);
-        letterRack.setAlignment(Pos.CENTER);
+        BorderPane.setAlignment(topMenu, Pos.TOP_CENTER);
+        BorderPane.setAlignment(GameBoard(), Pos.CENTER);
+        BorderPane.setAlignment(LetterRack(), Pos.BOTTOM_CENTER);
         singleGameLayout.setTop(topMenu);
-        singleGameLayout.setCenter(board);
-        singleGameLayout.setBottom(letterRack);
+        singleGameLayout.setCenter(GameBoard());
+        singleGameLayout.setBottom(LetterRack());
         Scene singleGameScene = new Scene(singleGameLayout,1000,1000);
         
         return singleGameScene;
@@ -126,49 +123,28 @@ public class GUI extends Application{
     /*
      * This method creates the game board with rows and columns set.
      */
-    public StackPane GameBoard() {
-    	StackPane gameBoard = new StackPane();
+    public Pane GameBoard() {
+    	Pane gameBoard = new Pane();
     	gameBoard.setPrefSize(COL * TILE_SIZE, ROW * TILE_SIZE);
     	
-    	//make game tiles
     	for (int y = 0; y < ROW; y++) {
-    		if (y < ROW-2) {
-    			for (int x = 0; x < COL; x++) {
-        			
-        			//Add code for decide what status this tile is
-        			Tile tile = new Tile(0, x, y);
-        			tileGroup.getChildren().add(tile);
-        		}
+    		for (int x = 0; x < COL; x++) {
     			
-    		//make letter rack tiles	
-    		}else if (y == ROW-1) {
-    			for (int i = 4; i < 11; i++) {
-    				Tile tile = new Tile(9, i, y);
-        			tileGroup.getChildren().add(tile);
-        			Label letter = new Label("A");
-        			letter.relocate(i * TILE_SIZE, TILE_SIZE);
-//        			LetterLabel l = makeLetter("A", i, y);
-//        			tile.setLetter(l);
-        			letterGroup.getChildren().add(letter);
-    	    	}
+    			//Add code for decide what status this tile is
+    			Tile tile = new Tile(0, x, y);
+    			tileGroup.getChildren().add(tile);
     		}
     	}
-    	gameBoard.getChildren().addAll(tileGroup, letterGroup);
+    	
+    	gameBoard.getChildren().addAll(tileGroup);
     	
     	return gameBoard;
-    }
-    
-    public LetterLabel makeLetter(String l, int x, int y) {
-    	LetterLabel letter = new LetterLabel(l, x, y);
-    	
-    	return letter;
     }
     
     /*
      * This method creates a letter rack.
      */
     public HBox LetterRack() {
-    	
     	HBox letterRack = new HBox(10);
     	letterRack.setPadding(new Insets(10,10,10,10));
     	Label letter1 = new Label("A");
