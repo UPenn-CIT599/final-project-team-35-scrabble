@@ -1,0 +1,12 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class BagOfLettersTest {
+
+	@Test
+	void testShuffleAndPickLetters() {
+		fail("Not yet implemented");
+	}
+
+}

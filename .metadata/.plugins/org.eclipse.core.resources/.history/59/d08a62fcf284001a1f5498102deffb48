@@ -1,0 +1,22 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+class BagOfLettersTest {
+
+	@Test
+	void testAddLetters() {
+		BagOfLetters bag = new BagOfLetters();
+		int originalSize = bag.getCurrentBagOfLetters().size();
+		ArrayList<Letter> lettersToAdd = new ArrayList<Letter>();
+		Letter l1 = new Letter("A");
+		Letter l2 = new Letter("B");
+		Letter l3 = new Letter("D");
+		bag.addLetters(lettersToAdd);
+		assertEquals(bag.getCurrentBagOfLetters().size(),originalSize+3);
+
+	}
+
+}
