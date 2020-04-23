@@ -79,6 +79,35 @@ public class Board {
         int[] thisWordValues   = new int[15];    
         String[] thisValues = new String[15];
         
+        /*
+        if ((i == 0) || (i == 7) || (i == 14)) {
+            if (i == 7) {
+                String[] cellValues   = {"3W", "1L", "1L", "2L", "1L", "1L", "1L", "2W", "1L", "1L", "1L", "2L", "1L", "1L","3W"}; 
+                thisValues = cellValues;                
+            } else {
+                String[] cellValues   = {"3W", "1L", "1L", "2L", "1L", "1L", "1L", "3W", "1L", "1L", "1L", "2L", "1L", "1L","3W"}; 
+                thisValues = cellValues;                
+            }                                                         
+        } else if ((i == 1) || (i == 13)) {  
+            String[] cellValues   = {"1L", "2W", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "2W","1L"}; 
+            thisValues = cellValues;            
+        } else if ((i == 2) || (i == 12)) {
+            String[] cellValues   = {"1L", "1L", "2W", "1L", "1L", "1L", "2L", "1L", "2L", "1L", "1L", "1L", "2W", "1L","1L"}; 
+            thisValues = cellValues;            
+        } else if ((i == 3) || (i == 11)) {
+            String[] cellValues   = {"2L", "1L", "1L", "2W", "1L", "1L", "1L", "2L", "1L", "1L", "1L", "2W", "1L", "1L","2L"}; 
+            thisValues = cellValues;            
+        } else if ((i == 4) || (i == 10)) {
+            String[] cellValues   = {"1L", "1L", "1L", "1L", "2W", "1L", "1L", "1L", "1L", "1L", "2W", "1L", "1L", "1L","1L"}; 
+            thisValues = cellValues;            
+        } else if ((i == 5) || (i == 9)) {
+            String[] cellValues   = {"1L", "3L", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "3L","1L"}; 
+            thisValues = cellValues;            
+        } else if ((i == 6) || (i == 8)) {
+            String[] cellValues   = {"1L", "1L", "2L", "1L", "1L", "1L", "2L", "1L", "2L", "1L", "1L", "1L", "2L", "1L","1L"}; 
+            thisValues = cellValues;            
+        }  */
+        
         if ((i == 0) || (i == 7) || (i == 14)) {
             if (i == 7) {
                 String[] cellValues   = {"TW", "BL", "BL", "DL", "BL", "BL", "BL", "ST", "BL", "BL", "BL", "DL", "BL", "BL","TW"}; 

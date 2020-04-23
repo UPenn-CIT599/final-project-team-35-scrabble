@@ -37,6 +37,7 @@ public class Player {
         name = playerName;
         currentLetterTray = new ArrayList<Letter>();
         errorChancesPerTurn = 0;
+        totalScore = 0;
     }
     
     /**
@@ -58,6 +59,13 @@ public class Player {
     public int getTotalScore() {             
         return totalScore;        
     }   
+    
+    /**
+     * Setter method to update Total Score of this Player
+     */
+    public void setTotalScore(int tScore) {             
+        totalScore = tScore;        
+    }     
     
     /**
      * Getter method for returning current LetterTray of this Player

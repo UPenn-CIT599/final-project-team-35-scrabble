@@ -86,7 +86,11 @@ public class DummyGUI {
             playerScores.put(newName, 0);   //Creating new entry and score for Player with name via "playerName" 
         }            
         currentPlayerName = playerNames.get(0); 
-    }   
+    }  
+    
+    public void Player1Steps() {
+        
+    }
     
     public void displayScrabbleBoard(ArrayList<Cell[]> displayBoard) {
         for (int i = 0; i < 15; i++) {

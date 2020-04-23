@@ -12,7 +12,9 @@ public class Cell {
     private Letter letter;
     private boolean positionTaken;
     private String verticalWord;
+    private int verticalScore;
     private String horizontalWord;
+    private int horizontalScore;
     
     /**
      * Constructor
@@ -25,6 +27,8 @@ public class Cell {
         //cellWordValue = wordValue;  
         posValue = cellValue;
         positionTaken = false;
+        verticalScore = 0;
+        horizontalScore = 0;
     }
        
     /**
@@ -91,6 +95,34 @@ public class Cell {
     public void setHorizontalWord(String horWord) {
         horizontalWord = horWord;        
     }      
+    
+    /**
+     * Getter method for verticalScore.
+     */
+    public int getVerticalScore() {
+        return verticalScore;        
+    }     
+    
+    /**
+     * Setter method for verticalScore.
+     */
+    public void setVerticalScore(int vertScore) {
+        verticalScore = vertScore;        
+    }  
+    
+    /**
+     * Getter method for horizontalScore.
+     */
+    public int getHorizontalScore() {
+        return horizontalScore;        
+    }     
+    
+    /**
+     * Setter method for horizontalScore.
+     */
+    public void setHorizontalScore(int horScore) {
+        horizontalScore = horScore;        
+    }  
     
     /**
      * Returns a letter if there is one, otherwise returns the position

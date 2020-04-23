@@ -42,7 +42,7 @@ public class BagOfLetters {
     public ArrayList<Letter> shuffleAndPickLetters(int numLetters) {
         numLettersToPick = numLetters;
         pickOfNewLetters.clear();       
-        //Shuffle();
+        //Shuffle(); //Already done in Ln-47 using rand fn
         for (int i=0; i < numLetters; i++) {
             int randInt = rand.nextInt(letters.size());
             Letter newLetter = letters.get(randInt);
@@ -58,15 +58,7 @@ public class BagOfLetters {
      */
     public void addLetters(ArrayList<Letter> lettersToAddBack) {
         letters.addAll(lettersToAddBack);       
-    }     
-    
-    /**
-     * This method shuffles the letters in the "Bag of Letters".
-     *           
-     */
-    public void Shuffle() {
-        // TODO : Check if needed. 
-    }    
+    }       
     
     /**
      * This method removes the letter/letters from the "Bag of Letters".
@@ -85,7 +77,10 @@ public class BagOfLetters {
      *        
      */
     public boolean isEmpty() {
-        boolean bagEmpty = false;
+        boolean bagEmpty = false;        
+        if (letters.size() == 0) {
+            bagEmpty = true;            
+        }
         return bagEmpty;
     }    
     
