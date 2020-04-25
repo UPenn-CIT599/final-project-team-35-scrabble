@@ -36,7 +36,7 @@
                                  <children>
                                     <Button id="btnSave" fx:id="btnSave" mnemonicParsing="false" onAction="#handleSave" prefHeight="48.0" prefWidth="87.0" text="Save" />
                                     <Separator orientation="VERTICAL" prefHeight="48.0" prefWidth="31.0" visible="false" />
-                                    <Button fx:id="btnSearch" disable="true" mnemonicParsing="false" onAction="#handleSearch" prefHeight="48.0" prefWidth="37.0" text="Search" visible="false" />
+                                    <Button fx:id="btnSearch" mnemonicParsing="false" onAction="#handleSearch" prefHeight="48.0" prefWidth="84.0" text="Search" />
                                     <Separator orientation="VERTICAL" prefHeight="48.0" prefWidth="51.0" visible="false" />
                                     <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#handleExit" prefHeight="48.0" prefWidth="88.0" text="Exit" />
                                  </children>

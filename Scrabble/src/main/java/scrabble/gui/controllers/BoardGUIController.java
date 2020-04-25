@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -31,6 +32,7 @@ import scrabble.Cell;
 import scrabble.Letter;
 import scrabble.events.BoardEvent;
 import scrabble.events.LetterEvent;
+import scrabble.gui.Animations;
 import scrabble.gui.DummyGUI;
 
 public class BoardGUIController implements Initializable {
@@ -38,6 +40,7 @@ public class BoardGUIController implements Initializable {
     private DummyGUI helper;
     private Stage stage;
     private boolean swapMode, tileBagActive;
+
 
     private Set<String> selectedLetters;
     private String selectedLetter;
@@ -138,8 +141,10 @@ public class BoardGUIController implements Initializable {
                     }
                 }
             });
+            
             hBoxLetters.getChildren().add(btn);
         }
+        Animations.BounceInTransition(hBoxLetters);
     }
 
     private void initializeBoard() {
@@ -230,6 +235,7 @@ public class BoardGUIController implements Initializable {
                     // row.getChildren().add(label);
                     row.getChildren().add(tile);
                 }
+               
                 vBoxTileBag.getChildren().add(row);
             }
         }
@@ -451,7 +457,15 @@ public class BoardGUIController implements Initializable {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String word = result.get();
-            showInfoDialog("Success", "Success : " + word + " is in dictionary.");
+            if(word.isEmpty())
+                return ;
+
+            boolean found  = this.helper.searchWord(word);
+            System.out.println("Found : " +found);
+            if(found)
+                showInfoDialog("Success", "Success : " + word + " is in dictionary.");
+            else 
+                showInfoDialog("Failed", "Failed : " + word + " is not in dictionary.");
         }
     }
 
@@ -462,6 +476,7 @@ public class BoardGUIController implements Initializable {
         alert.setGraphic(null);
         alert.setContentText(message);
         alert.showAndWait();
+        
     }
 
     public void close(){

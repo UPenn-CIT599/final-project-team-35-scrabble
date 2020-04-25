@@ -161,6 +161,13 @@ public class DummyGUI extends Application implements GameEventListener {
 
     }
 
+
+    public boolean searchWord(String word){
+
+      return this.scrabble.checkWordExists(word);
+    }
+
+
     private void checkEndStatus() {
 
         if (scrabble.getGameStatus()) {
