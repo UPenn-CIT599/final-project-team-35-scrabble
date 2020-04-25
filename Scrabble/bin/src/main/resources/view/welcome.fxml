@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="mainAnchorPane" prefHeight="719.0" prefWidth="927.0" styleClass="mainBoard" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrabble.gui.controllers.WelcomeGUIController">
+   <children>
+      <ImageView fitHeight="147.0" fitWidth="803.0" layoutX="100.0" layoutY="59.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" styleClass="title" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+         <image>
+            <Image url="@../images/title.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnClickInstructions" layoutX="201.0" layoutY="228.0" mnemonicParsing="false" onAction="#showInstructions" prefHeight="26.0" prefWidth="526.0" text="Click Here For Instructions" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="200.0" />
+      <MenuButton fx:id="btnPlayerSelect" layoutX="330.0" layoutY="313.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="266.0" text="Select Player" AnchorPane.leftAnchor="330.0" AnchorPane.rightAnchor="331.0">
+        <items>
+            <MenuItem fx:id="menuDefault" mnemonicParsing="false" onAction="#onPlayersChoosen" text="Select Player" />
+          <MenuItem fx:id="menuPlayer1" mnemonicParsing="false" onAction="#onPlayersChoosen" text="1 Player" />
+          <MenuItem fx:id="menuPlayer2" mnemonicParsing="false" onAction="#onPlayersChoosen" text="2 Player" />
+        </items>
+      </MenuButton>
+      <Pane fx:id="pane1" layoutX="197.0" layoutY="418.0" prefHeight="91.0" prefWidth="520.0" visible="false">
+         <children>
+            <TextField fx:id="textPlayer1" layoutX="173.0" layoutY="22.0" prefHeight="50.0" prefWidth="295.0" />
+            <Label layoutX="62.0" layoutY="22.0" prefHeight="50.0" prefWidth="78.0" text="Player 1 :" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane fx:id="pane2" layoutX="204.0" layoutY="498.0" prefHeight="91.0" prefWidth="520.0" visible="false">
+         <children>
+            <TextField fx:id="textPlayer2" layoutX="168.0" layoutY="21.0" prefHeight="50.0" prefWidth="295.0" />
+            <Label layoutX="55.0" layoutY="21.0" prefHeight="50.0" prefWidth="78.0" text="Player 2 :" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Button id="btnStart" fx:id="btnStart" disable="true" layoutX="387.0" layoutY="630.0" mnemonicParsing="false" onAction="#startGame" prefHeight="59.0" prefWidth="154.0" text="START" textFill="WHITE" />
+   </children>
+</AnchorPane>
