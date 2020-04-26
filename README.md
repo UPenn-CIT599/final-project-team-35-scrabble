@@ -40,6 +40,8 @@ You can check how many letters are left in letter bag by clicking bag button.ðŸ’
 
 <img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/bag%20of%20letter.png" width="600" height="400">
 
+Here is a video demo of the game by Mina:
+https://youtu.be/HoPkGZyrYZQ
 
 ## Built With
 
