@@ -11,15 +11,16 @@ public class BagOfLetters {
     private Random rand;
     String[] letterNames = { "A", "B", "C", "D", "E", "F", "G", "H", "I", 
                              "J", "K", "L", "M", "N", "O", "P", "Q", "R", 
-                             "S", "T", "U", "V", "W", "X", "Y", "Z", "BLANK" };
+                             "S", "T", "U", "V", "W", "X", "Y", "Z"}; //, "BLANK" };
     /* //Letter Distribution for Super-Scrabble with 21x21 rowsxColumns
      int[] letterDistribution = { 16, 4, 6, 8, 24, 4, 5, 5, 13, 
                               2, 2, 7, 6, 13, 15, 4, 2, 13, 
                               10, 15, 7, 3, 4, 2, 4, 2, 4 }; */
     //Letter Distribution for Regular Scrabble with 15x15 rowsxColumns    
-    int[] letterDistribution = { 9, 2, 2, 4, 12, 2, 3, 2, 9, 
+    //int[] letterDistribution = { 9, 2, 2, 4, 12, 2, 3, 2, 9, 
+    int[] letterDistribution = { 11, 2, 2, 4, 12, 2, 3, 2, 9,             
             1, 1, 4, 2, 6, 8, 2, 1, 6, 
-            4, 6, 4, 2, 2, 1, 2, 1, 2 };    
+            4, 6, 4, 2, 2, 1, 2, 1}; //, 2 };    
     int numLettersToPick;
     
     //ArrayList<String> pickOfNewLetters;    

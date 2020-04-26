@@ -40,6 +40,8 @@ public class ScrabbleGame {
     private boolean singleLetter;
     private int minPositionOfBoard;
     private int maxPositionOfBoard;
+    private int minPositionOfLetters;
+    private int maxPositionOfLetters;    
     // private boolean checkSurroundingPositions;
     StringBuilder newWord;
     private int newLettersOnlyScore;
@@ -165,6 +167,8 @@ public class ScrabbleGame {
         newBoardLetters.clear();
         minPositionOfBoard = 999;
         maxPositionOfBoard = -1;
+        minPositionOfLetters = 999;
+        maxPositionOfLetters = -1;        
         // getSurroundingBoardPositions();
         // Finding if the letters are vertical or horizontal or a single letter
         singleLetter = false;
@@ -212,6 +216,9 @@ public class ScrabbleGame {
             }
             getWordList(boardPositions, boardLetters); //
             // Check words against dictionary for errorCheck
+            for (int j = 0; j < currentPlayerWords.size(); j++) {
+                System.out.println("Word-" + j + " : " + currentPlayerWords.get(j));
+            }
             newWordsError = checkError(currentPlayerWords); // if error, set newWordsError = true;
         } else {
             newWordsError = true;
@@ -270,7 +277,10 @@ public class ScrabbleGame {
         currentPlayerWords.clear();
         ArrayList<Integer> tempPositions = new ArrayList<Integer>();
         ArrayList<String> tempLetters = new ArrayList<String>();
-        tempPositions = positions;
+        for (int i = 0; i < positions.size(); i++) {
+            tempPositions.add(positions.get(i));
+        }
+        //tempPositions = positions;
         tempLetters = letters;
         newLettersOnlyScore = 0;
         newWordScore = 0;
@@ -286,6 +296,8 @@ public class ScrabbleGame {
                 newWord.append(board.getCell(minPositionOfBoard - 15).getVerticalWord());
                 newLettersOnlyScore += board.getCell(minPositionOfBoard - 15).getVerticalScore();
                 newWordScore += board.getCell(minPositionOfBoard - 15).getVerticalScore();
+            } else if (board.getCell(minPositionOfBoard - 15).getPositionTaken()) {
+                newWord.append(board.getCell(minPositionOfBoard - 15).getCellValues());
             }
             int len = 1 + ((maxPositionOfBoard - minPositionOfBoard) / 15);
             int position = (positions.get(0) - 15);
@@ -327,6 +339,8 @@ public class ScrabbleGame {
                     newWord.append(board.getCell(maxPositionOfBoard + 15).getVerticalWord());
                     newLettersOnlyScore += board.getCell(maxPositionOfBoard + 15).getVerticalScore();
                     newWordScore += board.getCell(maxPositionOfBoard + 15).getVerticalScore();
+                } else if (board.getCell(maxPositionOfBoard + 15).getPositionTaken()) {
+                    newWord.append(board.getCell(maxPositionOfBoard + 15).getCellValues());
                 }
             }
             // Added Vertical Word
@@ -357,6 +371,8 @@ public class ScrabbleGame {
                         newWord.append(board.getCell(positions.get(i) - 1).getHorizontalWord());
                         newLettersOnlyScore += board.getCell(positions.get(i) - 1).getHorizontalScore();
                         newWordScore += board.getCell(positions.get(i) - 1).getHorizontalScore();
+                    } else if (board.getCell(positions.get(i) - 1).getPositionTaken()) {
+                        newWord.append(board.getCell(positions.get(i) - 1).getCellValues());
                     }
                 }
                 newWord.append(letters.get(i));
@@ -381,6 +397,8 @@ public class ScrabbleGame {
                         newWord.append(board.getCell(positions.get(i) + 1).getHorizontalWord());
                         newLettersOnlyScore += board.getCell(positions.get(i) + 1).getHorizontalScore();
                         newWordScore += board.getCell(positions.get(i) + 1).getHorizontalScore();
+                    } else if (board.getCell(positions.get(i) + 1).getPositionTaken()) {
+                        newWord.append(board.getCell(positions.get(i) + 1).getCellValues());
                     }
                 }
                 if (horWordExists) {
@@ -397,6 +415,8 @@ public class ScrabbleGame {
                 newWord.append(board.getCell(minPositionOfBoard - 1).getHorizontalWord());
                 newLettersOnlyScore += board.getCell(minPositionOfBoard - 1).getHorizontalScore();
                 newWordScore += board.getCell(minPositionOfBoard - 1).getHorizontalScore();
+            } else if (board.getCell(minPositionOfBoard - 1).getPositionTaken()) {
+                newWord.append(board.getCell(minPositionOfBoard - 1).getCellValues());
             }
             int len = 1 + (maxPositionOfBoard - minPositionOfBoard);
             int position = (positions.get(0) - 1);
@@ -438,6 +458,8 @@ public class ScrabbleGame {
                     newWord.append(board.getCell(maxPositionOfBoard + 1).getHorizontalWord());
                     newLettersOnlyScore += board.getCell(maxPositionOfBoard + 1).getHorizontalScore();
                     newWordScore += board.getCell(maxPositionOfBoard + 1).getHorizontalScore();
+                } else if (board.getCell(maxPositionOfBoard + 1).getPositionTaken()) {
+                    newWord.append(board.getCell(maxPositionOfBoard + 1).getCellValues());
                 }
             }
             // Added Horizontal Word
@@ -468,6 +490,8 @@ public class ScrabbleGame {
                         newLettersOnlyScore += board.getCell(positions.get(i) - 15).getVerticalScore();
                         newWordScore += board.getCell(positions.get(i) - 15).getVerticalScore();
                         vertWordExists = true;
+                    } else if (board.getCell(positions.get(i) - 15).getPositionTaken()) {
+                        newWord.append(board.getCell(positions.get(i) - 15).getCellValues());
                     }
                 }
                 newWord.append(letters.get(i));
@@ -492,6 +516,8 @@ public class ScrabbleGame {
                         newLettersOnlyScore += board.getCell(positions.get(i) + 15).getVerticalScore();
                         newWordScore += board.getCell(positions.get(i) + 15).getVerticalScore();
                         vertWordExists = true;
+                    } else if (board.getCell(positions.get(i) + 15).getPositionTaken()) {
+                        newWord.append(board.getCell(positions.get(i) + 15).getCellValues());
                     }
                 }
                 if (vertWordExists) {
@@ -513,10 +539,14 @@ public class ScrabbleGame {
                     newLettersOnlyScore += board.getCell(minPositionOfBoard - 15).getVerticalScore();
                     newWordScore += board.getCell(minPositionOfBoard - 15).getVerticalScore();
                     vWordExists = true;
+                } else if (board.getCell(minPositionOfBoard - 15).getPositionTaken()) {
+                    newWord.append(board.getCell(minPositionOfBoard - 15).getCellValues());
                 }
             }
             newWord.append(tempLetters.get(0));
             String tempCellValue = board.getCell(tempPositions.get(0)).getCellValues();
+            wordMultiplier = 1;
+            letterMultiplier = 1;            
             if (tempCellValue.equalsIgnoreCase("TW")) {
                 wordMultiplier = 3;
             } else if ((tempCellValue.equalsIgnoreCase("DW")) || (tempCellValue.equalsIgnoreCase("ST"))) {
@@ -536,6 +566,8 @@ public class ScrabbleGame {
                     newLettersOnlyScore += board.getCell(maxPositionOfBoard + 15).getVerticalScore();
                     newWordScore += board.getCell(maxPositionOfBoard + 15).getVerticalScore();
                     vWordExists = true;
+                } else if (board.getCell(maxPositionOfBoard + 15).getPositionTaken()) {
+                    newWord.append(board.getCell(maxPositionOfBoard + 15).getCellValues());
                 }
             }
             if (vWordExists) {
@@ -554,8 +586,8 @@ public class ScrabbleGame {
             boolean hWordExists = false;
             newLettersOnlyScore = 0;
             newWordScore = 0;
-            // wordMultiplier = 1;
-            // letterMultiplier = 1;
+            wordMultiplier = 1;
+            letterMultiplier = 1;
             if (newWord.length() != 0) {
                 newWord.delete(0, newWord.length());
             }
@@ -565,17 +597,21 @@ public class ScrabbleGame {
                     newWord.append(board.getCell(minPositionOfBoard - 1).getHorizontalWord());
                     newLettersOnlyScore += board.getCell(minPositionOfBoard - 1).getHorizontalScore();
                     newWordScore += board.getCell(minPositionOfBoard - 1).getHorizontalScore();
+                } else if (board.getCell(minPositionOfBoard - 1).getPositionTaken()) {
+                    newWord.append(board.getCell(minPositionOfBoard - 1).getCellValues());
                 }
             }
             newWord.append(tempLetters.get(0));
-            /*
-             * String tempCellValue = board.getCell(tempPositions.get(0)).getCellValues();
-             * if (tempCellValue.equalsIgnoreCase("TW")) { wordMultiplier = 3; } else if
-             * (tempCellValue.equalsIgnoreCase("DW")) { wordMultiplier = 2; } else if
-             * (tempCellValue.equalsIgnoreCase("TL")) { letterMultiplier = 3; } else if
-             * (tempCellValue.equalsIgnoreCase("DL")) { letterMultiplier = 2; } //Letter
-             * tempLetter = new Letter(tempLetters.get(0));
-             */
+            
+            if (tempCellValue.equalsIgnoreCase("TW")) {
+                wordMultiplier = 3;
+            } else if ((tempCellValue.equalsIgnoreCase("DW")) || (tempCellValue.equalsIgnoreCase("ST"))) {
+                wordMultiplier = 2;
+            } else if (tempCellValue.equalsIgnoreCase("TL")) {
+                letterMultiplier = 3;
+            } else if (tempCellValue.equalsIgnoreCase("DL")) {
+                letterMultiplier = 2;
+            }
             newLettersOnlyScore += tempLetter.convertNameToValue(tempLetters.get(0)); // This does not include the
                                                                                       // letter or word multiplier
             newWordScore += letterMultiplier * tempLetter.convertNameToValue(tempLetters.get(0));
@@ -586,6 +622,8 @@ public class ScrabbleGame {
                     newWord.append(board.getCell(maxPositionOfBoard + 1).getHorizontalWord());
                     newLettersOnlyScore += board.getCell(maxPositionOfBoard + 1).getHorizontalScore();
                     newWordScore += board.getCell(maxPositionOfBoard + 1).getHorizontalScore();
+                } else if (board.getCell(maxPositionOfBoard + 1).getPositionTaken()) {
+                    newWord.append(board.getCell(maxPositionOfBoard + 1).getCellValues());
                 }
             }
             if (hWordExists) {
@@ -687,7 +725,7 @@ public class ScrabbleGame {
         boolean wordExists = false;
         ArrayList<String> singleWord = new ArrayList<String>();
         singleWord.add(wordCheck);
-        wordExists = checkError(singleWord);
+        wordExists = !checkError(singleWord);
 
         // If we want the Current Player's score docked a few points each time for
         // checking the dictionary, use this

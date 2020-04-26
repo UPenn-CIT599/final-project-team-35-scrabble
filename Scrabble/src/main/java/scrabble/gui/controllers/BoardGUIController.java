@@ -438,7 +438,8 @@ public class BoardGUIController implements Initializable {
 
     // On save click
     public void handleSave(ActionEvent event) {
-        this.helper.saveGame();
+        //this.helper.saveGame();
+        this.helper.endGame(this.stage);        
     }
 
     // On Exit Click
