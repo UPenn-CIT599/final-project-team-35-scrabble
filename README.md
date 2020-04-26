@@ -29,6 +29,8 @@ Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./g
 
 ![Image description](https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/bag%20of%20letter.png){:height="700px" width="400px"}
 
+<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/welcome%20interface.png" width="100" height="100">
+
 
 ## Running the tests
 
