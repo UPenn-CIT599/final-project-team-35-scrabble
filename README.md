@@ -41,11 +41,6 @@ You can check how many letters are left in letter bag by clicking bag button.ðŸ’
 <img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/bag%20of%20letter.png" width="600" height="400">
 
 
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
 ## Built With
 
 * [JavaFX](https://openjfx.io/) - The GUI interface.
