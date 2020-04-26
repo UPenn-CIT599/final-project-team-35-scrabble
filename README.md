@@ -14,9 +14,9 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 4. Run the project in terminal:  ./gradlew run
 
 ## How to run in Eclipse
-1. Add JavaSE-13 library.
+1. Add JavaSE-11.0.7 library.
 Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> JRE System Library ->
-Execution environment -> JavaSE-13
+Execution environment -> JavaSE-11.0.7
 2. Download JavaFX from https://openjfx.io/. Unzip it.
 3. Add JavaFx library to eclipse
 Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> User Library -> User Library -> New -> name it as JavaFX -> Browse to the JavaFx library you just downloaded. Add all JARs in the folder. Here is a more detailed instruction: https://www.javatpoint.com/javafx-with-eclipse
