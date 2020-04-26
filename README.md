@@ -1,4 +1,4 @@
-# final-project-team-35-scrabble
+# final-project-team-35-Scrabble-Game
 
 Gaming is a popular entertainment venture, a lot of gaming currently is being done virtually online. In the cit-591 course, we have had the practice of some of the popular games like BlackjackSolitaire as an assignment, and on a basic level Chess, Snakes and Ladders etc. We want to build on this expertise and scale higher with new games called Scrabble. In this game, a user (or two users) can access and play against each other. In this game, players will have a game board, 15 by 15 tiles, a letter bag, and seven racks. The rule is player 1 clicks the letter in the rack and then clicks any tile on the board to relocate the letter. Each time the player finish this round, click submit button to save the words on board, then it will pass to the other player or next round. The more words player made, the more score the player win. Each letter has its own score and some tiles have bonus effects.
 
