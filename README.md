@@ -8,7 +8,7 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 
 Install Eclipse with JavaSE-13 library.
 
-![Image description]https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/Letters.png
+![Image description](https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/Letters.png)
 
 ### Installing
 
