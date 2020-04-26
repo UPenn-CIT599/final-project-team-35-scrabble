@@ -21,17 +21,24 @@ Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./g
 
 ### How to Play
 
-
+You can choose singler player mode or multi player mode and name your player.
 
 <img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/welcome%20interface.png" width="600" height="400">
 
+Click the letter in the rack and then click any tile you want to relocate the letter.
+First word must be played using the center square with a star. 
+Each time you finish this round, click submit button , it will pass to the other player or your next round.
+The more words you made, the more score you win. Each letter has its own score and some tiles have bonus effects.
 
-<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/multiple%20player%20interface.png" width="100" height="100">
+<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/multiple%20player%20interface.png" width="600" height="400">
 
+You can search a word in dictionary by clicking search button, swap tiles from tile bag by clicking swap button , pass your turn by clicking pass button , and undo your step by clicking undo button.
 
-<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/search%20function.png" width="100" height="100">
+<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/search%20function.png" width="600" height="400">
 
-<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/bag%20of%20letter.png" width="100" height="100">
+You can also check how many letters are left in letter bag by clicking bag button.
+
+<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/bag%20of%20letter.png" width="600" height="400">
 
 
 
