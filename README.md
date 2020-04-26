@@ -8,8 +8,6 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 
 Install Eclipse with JavaSE-13 library.
 
-![Image description](https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/Letters.png)
-
 ### Installing
 
 1. Add JavaSE-13 library.
@@ -21,6 +19,16 @@ Right click on the Scrabble project -> Project -> Properties -> Java Build Path 
 4. Build Gradle
 Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./gradlew build" (Mac) ".\gradlew build" (PC)
 
+### How to Play
+
+![Image description](https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/welcome%20interface.png)
+
+![Image description](https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/single%20player%20interface.png)
+
+![Image description]()
+
+![Image description]()
+
 
 ## Running the tests
 
@@ -29,7 +37,8 @@ Explain how to run the automated tests for this system
 ## Built With
 
 * [JavaFX](https://openjfx.io/) - The GUI interface.
-* [Gradel](--) - 
+* [Gradel]
+
 
 ## Authors
 
