@@ -23,7 +23,7 @@ Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./g
 
 
 
-<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/welcome%20interface.png" width="700" height="500">
+<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/welcome%20interface.png" width="600" height="400">
 
 
 <img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/multiple%20player%20interface.png" width="100" height="100">
