@@ -32,7 +32,7 @@ The more words you made, the more score you win. Each letter has its own score a
 
 <img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/multiple%20player%20interface.png" width="600" height="400">
 
-You can search a word in dictionary by clicking search button, swap tiles from tile bag by clicking swap button and the letter you want to swap and swap button again, pass your turn by clicking pass button, and undo your step by clicking undo button.
+You can search if a word is in dictionary by clicking search button, swap tiles from tile bag by clicking swap button and the letter you want to swap and swap button again, pass your turn by clicking pass button, and undo your step by clicking undo button.
 
 <img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/search%20function.png" width="600" height="400">
 
