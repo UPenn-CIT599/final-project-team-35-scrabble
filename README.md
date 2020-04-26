@@ -4,12 +4,14 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 
 ## Getting Started
 
-### Prerequisites
+## How to run in terminal 
 
-Install Eclipse with JavaSE-13 library.
+1. Clone this repo to your local machine with this link https://github.com/UPenn-CIT599/final-project-team-35-scrabble.git
+2. Open a terminal under folder "Scrabble".
+3. Build Gradle project in terminal:   ./gradlew build
+4. Run the project in terminal:  ./gradlew run
 
-### Installing
-
+## How to run in Eclipse
 1. Add JavaSE-13 library.
 Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> JRE System Library ->
 Execution environment -> JavaSE-13
@@ -46,6 +48,7 @@ https://youtu.be/HoPkGZyrYZQ
 ## Built With
 
 * [JavaFX](https://openjfx.io/) - The GUI interface.
+* [Gradle](https://gradle.org/) - Project Configuration.
 
 
 ## Authors
