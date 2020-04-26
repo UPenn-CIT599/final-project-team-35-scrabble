@@ -6,6 +6,8 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 
 ## How to run in terminal 
 
+*Make sure you java 11 or higher installed.
+
 1. Clone this repo to your local machine with this link https://github.com/UPenn-CIT599/final-project-team-35-scrabble.git
 2. Open a terminal under folder "Scrabble".
 3. Build Gradle project in terminal:   ./gradlew build
