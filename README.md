@@ -49,13 +49,12 @@ Explain how to run the automated tests for this system
 ## Built With
 
 * [JavaFX](https://openjfx.io/) - The GUI interface.
-* [Gradel]
 
 
 ## Authors
 
 * **Daisy Liu**
-* **Shodhan **
+* **Shodhan Shetty**
 * **Yugui Chen**
 
 
