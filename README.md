@@ -4,7 +4,7 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 
 ## Getting Started
 
-## How to run in visual studio code (prefered)
+## How to run in Visual Studio Code (preferred)
 
 *Make sure you have java 11 or higher installed.
 
