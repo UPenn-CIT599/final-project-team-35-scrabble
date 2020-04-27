@@ -18,3 +18,10 @@ In the game page, you can click the letter in the rack and then click any tile y
 You can search if a word is in dictionary by clicking search button 📖, swap tiles from tile bag by clicking swap button and the letter you want to swap and swap button again 🔄, pass your turn by clicking pass button ▶️, and undo your step by clicking undo button.↩️
 
 You can check how many letters are left in letter bag by clicking bag button.
+
+
+Authors
+
+Shodhan Shetty--initiated the back-end with the Scrabble algorithm
+Daisy Liu--Designed the Project structure and implemented the GUI
+Yugui Chen--Created all the images elements in the GUI and completed all the jUnit test files
