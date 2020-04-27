@@ -1,17 +1,30 @@
-Team-35-Scrabble-GameGaming is a popular entertainment venture, a lot of gaming currently is being done virtually online. In the cit-591 course, we have had the practice of some of the popular games like BlackjackSolitaire as an assignment, and on a basic level Chess, Snakes and Ladders etc. We want to build on this expertise and scale higher with new games called Scrabble. In this game, a user (or two users) can access and play against each other. In this game, players will have a game board, 15 by 15 tiles, a letter bag, and seven racks. The rule is player 1 clicks the letter in the rack and then clicks any tile on the board to relocate the letter. Each time the player finish this round, click submit button to save the words on board, then it will pass to the other player or next round. The more words player made, the more score the player win. Each letter has its own score and some tiles have bonus effects. Implementation Method: •Front End GUI:•JavaFX (needed jdk-11.0.7 for Java)•Gradle•Challenges: •Setup and Interfacing with Back End•Handling animation, and event handling•Back End:•Implemented the Scrabble Algorithm, and created some new rules for the game•Using Classes, and different data Structures. •Challenges: •The Scrabble Algorithm was much more challenging than originally envisioned. •Includes storing previously created words, and the scores associated with the letters ONLY as memory (by updating associated objects)•Also, there are different kinds of scores that need to be considered from the Board and Letters.•Also check if the word is correct from partially provided word as half the letters were already used previously in the board!•CRC Cards created at the beginning of the project were very helpful•Classes for Back End:•ScrabbleRunner (same as main.java): start GUI  (gameUI)•GUI: includes inputReader, display, playerList•ScrabbleGame: includes play, dictionary, playerTurn, gameResult, playAgain, reStartPlay•Dictionary•Board: includes currentBoard•BagOfLetters: includes shuffleAndPickLetters, getCurrentBagOfLetters, removeLetter, addLetters, isEmpty•WordBuilder•Letter•Cell•ScoreKeeper: scoreOfEachPlayer (TBD: may not be needed, as already available from each Player)•Player: includes currentTrayOfLetters (Here, 7 for Scrabble), letterSelectionChoice, getTotalScore, getCurrentLetterTray•Front-End Classes:•GUI•Welcome GUI Controller•Board GUI ControllerHow to run in terminal:
-*Make sure you java 11 or higher installed.
+Team-35-Scrabble-GameGaming is a popular entertainment venture, a lot of gaming currently is being done virtually online. In the cit-591 course, we have had the practice of some of the popular games like BlackjackSolitaire as an assignment, and on a basic level Chess, Snakes and Ladders etc. We want to build on this expertise and scale higher with new games called Scrabble. In this game, a user (or two users) can access and play against each other. In this game, players will have a game board, 15 by 15 tiles, a letter bag, and seven racks. The rule is player 1 clicks the letter in the rack and then clicks any tile on the board to relocate the letter. Each time the player finish this round, click submit button to save the words on board, then it will pass to the other player or next round. The more words player made, the more score the player win. Each letter has its own score and some tiles have bonus effects. Implementation Method: •Front End GUI:•JavaFX (needed jdk-11.0.7 for Java)•Gradle•Challenges: •Setup and Interfacing with Back End•Handling animation, and event handling•Back End:•Implemented the Scrabble Algorithm, and created some new rules for the game•Using Classes, and different data Structures. •Challenges: •The Scrabble Algorithm was much more challenging than originally envisioned. •Includes storing previously created words, and the scores associated with the letters ONLY as memory (by updating associated objects)•Also, there are different kinds of scores that need to be considered from the Board and Letters.•Also check if the word is correct from partially provided word as half the letters were already used previously in the board!•CRC Cards created at the beginning of the project were very helpful•Classes for Back End:•ScrabbleRunner (same as main.java): start GUI  (gameUI)•GUI: includes inputReader, display, playerList•ScrabbleGame: includes play, dictionary, playerTurn, gameResult, playAgain, reStartPlay•Dictionary•Board: includes currentBoard•BagOfLetters: includes shuffleAndPickLetters, getCurrentBagOfLetters, removeLetter, addLetters, isEmpty•WordBuilder•Letter•Cell•ScoreKeeper: scoreOfEachPlayer (TBD: may not be needed, as already available from each Player)•Player: includes currentTrayOfLetters (Here, 7 for Scrabble), letterSelectionChoice, getTotalScore, getCurrentLetterTray•Front-End Classes:•GUI•Welcome GUI Controller•Board GUI Controller
+## How to run in visual studio code (prefered)
 
-Clone this repo to your local machine with this link https://github.com/UPenn-CIT599/final-project-team-35-scrabble.git
-Open a terminal under folder "Scrabble".
-Build Gradle project in terminal: ./gradlew build
-Run the project in terminal: ./gradlew run
+*Make sure you have java 11 or higher installed.
 
-How to run in Eclipse
+1. Clone this repo to your local machine with this link https://github.com/UPenn-CIT599/final-project-team-35-scrabble.git
+2. Unzip it and open the folder in Visual Studio Code. 
+3. Launch the app from visual studio code by running the main file "ScrabbleRunner.java" under scrabble/scr/main/java/scarbble.
 
-Add JavaSE-11.0.7 library. Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> JRE System Library -> Execution environment -> JavaSE-11.0.7
-Download JavaFX from https://openjfx.io/. Unzip it.
-Add JavaFx library to eclipse Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> User Library -> User Library -> New -> name it as JavaFX -> Browse to the JavaFx library you just downloaded. Add all JARs in the folder. Here is a more detailed instruction: https://www.javatpoint.com/javafx-with-eclipse
-Build Gradle Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./gradlew build" (Mac) ".\gradlew build" (PC)How to Play
+## How to run in terminal
+
+1. Open a terminal under folder "Scrabble".
+2. Build Gradle project in terminal:   ./gradlew build
+3. Run the project in terminal:  ./gradlew run
+
+
+## How to run in Eclipse
+1. Add JavaSE-11.0.7 library.
+Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> JRE System Library ->
+Execution environment -> JavaSE-11.0.7
+2. Download JavaFX from https://openjfx.io/. Unzip it.
+3. Add JavaFx library to eclipse
+Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> User Library -> User Library -> New -> name it as JavaFX -> Browse to the JavaFx library you just downloaded. Add all JARs in the folder. Here is a more detailed instruction: https://www.javatpoint.com/javafx-with-eclipse
+4. Build Gradle
+Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./gradlew build" (Mac) ".\gradlew build" (PC)
+
+How to Play
 In the welcome page, you can choose singler player mode 🕺 or multi player mode and name your player.
 In the game page, you can click the letter in the rack and then click any tile you want to relocate the letter.🎴 First word must be played using the center square with a star. ⭐️ Each time you finish this round, click submit button , it will pass to the other player or your next round.🔂 The more words you made, the more score you win. Each letter has its own score and some tiles have bonus effects.🤑
 
