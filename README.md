@@ -4,14 +4,20 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 
 ## Getting Started
 
-## How to run in terminal 
+## How to run in visual studio code (prefered)
 
 *Make sure you have java 11 or higher installed.
 
 1. Clone this repo to your local machine with this link https://github.com/UPenn-CIT599/final-project-team-35-scrabble.git
-2. Open a terminal under folder "Scrabble".
-3. Build Gradle project in terminal:   ./gradlew build
-4. Run the project in terminal:  ./gradlew run
+2. Unzip it and open the folder in Visual Studio Code. 
+3. Launch the app from visual studio code by running the main file "ScrabbleRunner.java" under scrabble/scr/main/java/scarbble.
+
+## How to run in terminal
+
+1. Open a terminal under folder "Scrabble".
+2. Build Gradle project in terminal:   ./gradlew build
+3. Run the project in terminal:  ./gradlew run
+
 
 ## How to run in Eclipse
 1. Add JavaSE-11.0.7 library.
