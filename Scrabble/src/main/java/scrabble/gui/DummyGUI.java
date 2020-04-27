@@ -96,15 +96,15 @@ public class DummyGUI extends Application implements GameEventListener {
     public String getInstructions() {
         String dummyInstruction = "Click the letter in the rack and then click any tile you want to relocate the letter.\n"+
                 "    \n"+
-                "First word must be played using the center square with a star. \n"+
+                "The first word must be played using the center square with a star. \n"+
                 "    \n"+
-                "Each time you finish this round, click submit button , it will pass to the other player or your next round. \n"+
+                "Each time you finish this round, click submit button, it will pass to the other player or your next round. \n"+
                 "     \n"+
-                "The more words you made, the more score you win. Each letter has its own score and some tiles have bonus effects. \n"+
+                "The more words you made, the more score you win. Each letter has its score and some tiles have bonus effects like double score, triple score, double word and triple word. \n"+
                 "     \n"+
-                "You can search a word in dictionary by clicking search button , swap tiles from tile bag by clicking swap button , pass your turn by clicking pass button , and undo your step by clicking undo button  \n"+
+                "You can search if a word is in dictionary by clicking the search button, swap tiles from tile bag by clicking the swap button, clicking the letters you want to swap and clicking the swap button again, pass your turn by clicking pass button, and undo your step by clicking undo button  \n"+
                 "      \n"+
-                " Made with love by Shodhan, Daisy and Mina. Have fun!! \n"+
+                " Made with love by Shodhan, Daisy, and Mina. Have fun!!! \n"+
                 "      \n";
         return dummyInstruction;
     }
