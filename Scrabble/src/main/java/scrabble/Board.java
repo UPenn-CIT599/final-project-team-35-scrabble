@@ -22,7 +22,8 @@ public class Board {
     private Cell[] r11;
     private Cell[] r12;   
     private Cell[] r13;
-    private Cell[] r14;    
+    private Cell[] r14;  
+    private int numRowsAndCols;
     
     private ArrayList<Cell[]> scrabbleRows;   
     
@@ -31,6 +32,7 @@ public class Board {
      */
     public Board() {
         scrabbleRows = new ArrayList<Cell[]>();        
+        numRowsAndCols = 15;
         
         r0  = new Cell[15];        
         r1  = new Cell[15];
@@ -49,7 +51,7 @@ public class Board {
         r14 = new Cell[15];        
         
         for (int col=0; col < 15; col++) {   
-            boardNewCellHelper(col);            
+            boardNewCellHelper(col);               
         }
         
         scrabbleRows.add(r0);
@@ -66,7 +68,9 @@ public class Board {
         scrabbleRows.add(r11);    
         scrabbleRows.add(r12);
         scrabbleRows.add(r13);    
-        scrabbleRows.add(r14);        
+        scrabbleRows.add(r14);  
+        
+        boardNewCellHelper2();         
     }
    
     /**
@@ -80,35 +84,6 @@ public class Board {
         int[] thisLetterValues = new int[15];
         int[] thisWordValues   = new int[15];    
         String[] thisValues = new String[15];
-        
-        /*
-        if ((i == 0) || (i == 7) || (i == 14)) {
-            if (i == 7) {
-                String[] cellValues   = {"3W", "1L", "1L", "2L", "1L", "1L", "1L", "2W", "1L", "1L", "1L", "2L", "1L", "1L","3W"}; 
-                thisValues = cellValues;                
-            } else {
-                String[] cellValues   = {"3W", "1L", "1L", "2L", "1L", "1L", "1L", "3W", "1L", "1L", "1L", "2L", "1L", "1L","3W"}; 
-                thisValues = cellValues;                
-            }                                                         
-        } else if ((i == 1) || (i == 13)) {  
-            String[] cellValues   = {"1L", "2W", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "2W","1L"}; 
-            thisValues = cellValues;            
-        } else if ((i == 2) || (i == 12)) {
-            String[] cellValues   = {"1L", "1L", "2W", "1L", "1L", "1L", "2L", "1L", "2L", "1L", "1L", "1L", "2W", "1L","1L"}; 
-            thisValues = cellValues;            
-        } else if ((i == 3) || (i == 11)) {
-            String[] cellValues   = {"2L", "1L", "1L", "2W", "1L", "1L", "1L", "2L", "1L", "1L", "1L", "2W", "1L", "1L","2L"}; 
-            thisValues = cellValues;            
-        } else if ((i == 4) || (i == 10)) {
-            String[] cellValues   = {"1L", "1L", "1L", "1L", "2W", "1L", "1L", "1L", "1L", "1L", "2W", "1L", "1L", "1L","1L"}; 
-            thisValues = cellValues;            
-        } else if ((i == 5) || (i == 9)) {
-            String[] cellValues   = {"1L", "3L", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "3L", "1L", "1L", "1L", "3L","1L"}; 
-            thisValues = cellValues;            
-        } else if ((i == 6) || (i == 8)) {
-            String[] cellValues   = {"1L", "1L", "2L", "1L", "1L", "1L", "2L", "1L", "2L", "1L", "1L", "1L", "2L", "1L","1L"}; 
-            thisValues = cellValues;            
-        }  */
         
         if ((i == 0) || (i == 7) || (i == 14)) {
             if (i == 7) {
@@ -154,6 +129,23 @@ public class Board {
         r13[column]  = new Cell(column, thisValues[13]); 
         r14[column]  = new Cell(column, thisValues[14]);            
     }
+    
+    /**
+     * Helper method for assigning the min and max positions for each cell in the board
+     * @return
+     */ 
+    public void boardNewCellHelper2() {   
+        for (int i = 0; i < scrabbleRows.size(); i++) {
+            for (int j = 0; j < scrabbleRows.size(); j++) {
+                scrabbleRows.get(j)[i].setMinHorPositionOfWord(i + (scrabbleRows.size() * j));     
+                scrabbleRows.get(j)[i].setMaxHorPositionOfWord(i + (scrabbleRows.size() * j));  
+                scrabbleRows.get(j)[i].setMinVertPositionOfWord(i + (scrabbleRows.size() * j));  
+                scrabbleRows.get(j)[i].setMaxVertPositionOfWord(i + (scrabbleRows.size() * j));              
+            } 
+        }          
+    }    
+    
+    
     
     /**
      * Sends out the data for the current Board

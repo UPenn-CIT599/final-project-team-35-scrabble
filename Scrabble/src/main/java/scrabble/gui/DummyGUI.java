@@ -158,6 +158,7 @@ public class DummyGUI extends Application implements GameEventListener {
 
             // Refill the current player tray
             this.scrabble.refillEvent();
+            changePlayer(false);          
         } else {
 
             boardController.showInfoDialog("Error", "Invalid !");
@@ -165,10 +166,19 @@ public class DummyGUI extends Application implements GameEventListener {
             for (String bid : boardPositionIds) {
                 boardController.updateBoard(bid, null);
             }
+            
+            if (this.scrabble.getCurrentPlayer().getErrorChancesPerTurn() >= 2) {  
+                this.scrabble.getCurrentPlayer().setErrorChancesPerTurn(0);               
+                changePlayer(false);  
+            }  else {
+                this.scrabble.getCurrentPlayer().setErrorChancesPerTurn(1 + this.scrabble.getCurrentPlayer().getErrorChancesPerTurn());                
+                changePlayer(true);                  
+            }
+            System.out.println("Number of chances already taken by Current Player : " + this.scrabble.getCurrentPlayer().getErrorChancesPerTurn());        
         }
 
         checkEndStatus();
-        changePlayer(false);
+        //changePlayer(false);
 
     }
 

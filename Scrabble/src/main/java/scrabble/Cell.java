@@ -16,6 +16,10 @@ public class Cell {
     private int verticalScore;
     private String horizontalWord;
     private int horizontalScore;
+    private int minHorPositionOfWord;
+    private int maxHorPositionOfWord; 
+    private int minVertPositionOfWord;
+    private int maxVertPositionOfWord;     
     
     /**
      * Constructor
@@ -30,6 +34,10 @@ public class Cell {
         positionTaken = false;
         verticalScore = 0;
         horizontalScore = 0;
+        /*minHorPositionOfWord = position;
+        maxHorPositionOfWord = position; 
+        minVertPositionOfWord = position;
+        maxVertPositionOfWord = position;  */       
     }
        
     /**
@@ -52,7 +60,11 @@ public class Cell {
      * Setter method for card.
      */
     public void setLetter(Letter L) {
-        letter = L;        
+        letter = L;      
+        //verticalWord = L.getLetterName(); 
+        //horizontalWord = L.getLetterName();    
+        verticalScore = L.convertNameToValue(L.getLetterName());
+        horizontalScore = L.convertNameToValue(L.getLetterName());;        
     }
     
     /**
@@ -130,32 +142,6 @@ public class Cell {
      * @return
      */
     public String getCellValues() {
-    //public String[] getCellValues() {        
-        /*
-        String[] cellValues = new String[3];
-        if (letter != null) {
-            String name = letter.getLetterName();
-            int valueOfLetter = letter.getLetterScore();
-            //int letterValueOfPosition = cellLetterValue;
-            //int wordValueOfPosition = cellWordValue;            
-            cellValues[0] = name + valueOfLetter;
-            if (positionTaken) {
-                cellValues[1] = Integer.toString(1) + ""; 
-                cellValues[2] = Integer.toString(1) + "";                
-            } else {
-                cellValues[1] = Integer.toString(cellLetterValue) + ""; 
-                cellValues[2] = Integer.toString(cellWordValue) + "";                  
-            }                     
-        } else {            
-            cellValues[0] = "00";            
-            cellValues[1] = Integer.toString(cellLetterValue) + ""; 
-            cellValues[2] = Integer.toString(cellWordValue) + "";   
-        }      
-        return cellValues; */
-        /*
-        if (positionTaken) {
-            posValue = letter.getLetterName();
-        } */
         return posValue;
     }
     
@@ -167,5 +153,61 @@ public class Cell {
         if (positionTaken) {
             posValue = letter.getLetterName();
         }
-    }    
+    }   
+    
+    /**
+     * Getter method for min Position of horizontal word
+     */
+    public int getMinHorPositionOfWord() {
+        return minHorPositionOfWord;        
+    }     
+    
+    /**
+     * Setter method for min Position of horizontal word.
+     */
+    public void setMinHorPositionOfWord(int minHorPosOfWord) {
+        minHorPositionOfWord = minHorPosOfWord;        
+    } 
+    
+    /**
+     * Getter method for max Position of horizontal word
+     */
+    public int getMaxHorPositionOfWord() {
+        return maxHorPositionOfWord;        
+    }     
+    
+    /**
+     * Setter method for max Position of horizontal word.
+     */
+    public void setMaxHorPositionOfWord(int maxHorPosOfWord) {
+        maxHorPositionOfWord = maxHorPosOfWord;        
+    }   
+    
+    /**
+     * Getter method for min Position of Vertical word
+     */
+    public int getMinVertPositionOfWord() {
+        return minVertPositionOfWord;        
+    }     
+    
+    /**
+     * Setter method for min Position of Vertical word.
+     */
+    public void setMinVertPositionOfWord(int minVertPosOfWord) {
+        minVertPositionOfWord = minVertPosOfWord;        
+    } 
+    
+    /**
+     * Getter method for max Position of Vertical word
+     */
+    public int getMaxVertPositionOfWord() {
+        return maxVertPositionOfWord;        
+    }     
+    
+    /**
+     * Setter method for max Position of Vertical word.
+     */
+    public void setMaxVertPositionOfWord(int maxVertPosOfWord) {
+        maxVertPositionOfWord = maxVertPosOfWord;        
+    }     
 }
