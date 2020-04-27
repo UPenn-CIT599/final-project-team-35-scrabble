@@ -17,8 +17,8 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 ## How to run in terminal
 
 1. Open a terminal under folder "Scrabble".
-2. Build a Gradle project in terminal:   ./gradlew build
-3. Run the project in terminal:  ./gradlew run
+2. Build a Gradle project in terminal:   "./gradlew build" (MAC)  ".\gradlew build" (PC)
+3. Run the project in terminal:  "./gradlew run"(MAC)  ".\gradlew run"(PC) 
 
 
 ## How to run in Eclipse
@@ -28,8 +28,7 @@ Execution environment -> JavaSE-11.0.7
 2. Download JavaFX from https://openjfx.io/. Unzip it.
 3. Add JavaFx library to eclipse
 Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> User Library -> User Library -> New -> name it as JavaFX -> Browse to the JavaFx library you just downloaded. Add all JARs in the folder. Here is a more detailed instruction: https://www.javatpoint.com/javafx-with-eclipse
-4. Build Gradle
-Open your pc(mac) terminal -> open the scrabble folder in terminal -> input "./gradlew build" (Mac) ".\gradlew build" (PC)
+
 
 ### How to Play
 
