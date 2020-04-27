@@ -21,7 +21,6 @@ You can check how many letters are left in letter bag by clicking bag button.
 
 
 Authors
-
 Shodhan Shetty--Initiated the back-end with the Scrabble algorithm
 Daisy Liu--Designed the Project structure and implemented the GUI
 Yugui Chen--Created all the images elements in the GUI and completed all the jUnit test files
