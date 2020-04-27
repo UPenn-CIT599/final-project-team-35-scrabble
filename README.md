@@ -17,8 +17,8 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 ## How to run in terminal
 
 1. Open a terminal under folder "Scrabble".
-2. Build a Gradle project in terminal:   "./gradlew build" (MAC)  ".\gradlew build" (PC)
-3. Run the project in terminal:  "./gradlew run"(MAC)  ".\gradlew run"(PC) 
+2. Build a Gradle project in terminal:   "./gradlew build" for Mac or ".\gradlew build" for PC
+3. Run the project in terminal:  "./gradlew run" for Mac or ".\gradlew run" for PC.
 
 
 ## How to run in Eclipse
