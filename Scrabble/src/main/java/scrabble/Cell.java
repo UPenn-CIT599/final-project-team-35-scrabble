@@ -61,10 +61,22 @@ public class Cell {
      */
     public void setLetter(Letter L) {
         letter = L;      
+        if (getVerticalWord() == null) {
+            verticalWord = L.getLetterName();            
+        }
+        if (getHorizontalWord() == null) {
+            horizontalWord = L.getLetterName();            
+        }        
+        if (getVerticalScore() == 0) {
+            verticalScore = L.convertNameToValue(L.getLetterName());           
+        }
+        if (getHorizontalScore() == 0) {
+            horizontalScore = L.convertNameToValue(L.getLetterName());           
+        }         
         //verticalWord = L.getLetterName(); 
         //horizontalWord = L.getLetterName();    
-        verticalScore = L.convertNameToValue(L.getLetterName());
-        horizontalScore = L.convertNameToValue(L.getLetterName());;        
+        //verticalScore = L.convertNameToValue(L.getLetterName());
+        //horizontalScore = L.convertNameToValue(L.getLetterName());;        
     }
     
     /**
