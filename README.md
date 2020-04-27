@@ -12,6 +12,8 @@ Gaming is a popular entertainment venture, a lot of gaming currently is being do
 2. Unzip it and open the folder in Visual Studio Code. 
 3. Launch the app from visual studio code by running the main file "ScrabbleRunner.java" under scrabble/src/main/java/scrabble.
 
+<img src="https://github.com/UPenn-CIT599/final-project-team-35-scrabble/blob/master/Scrabble/src/main/resources/how%20to%20run%20in%20vs%20code.png" width="600" height="400">
+
 ## How to run in terminal
 
 1. Open a terminal under folder "Scrabble".
