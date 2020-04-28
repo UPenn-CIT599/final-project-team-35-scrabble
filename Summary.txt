@@ -60,8 +60,9 @@ Implementation Method: 
 3. Open eclipse
 4. Select "File" --> Open Projects from File System, and Select the Unzipped "Scrabble" folder
 5. now that the File System has been picked by eclipse and configure, right-click on the "Scrabble" Project, then go to "Gradle", and hit "Refresh Gradle Project"
-6. Now you should be able to run the "Scrabble" game by running the "Scrabble Runner".
-7. Please let us know if you run into any issues.
+6. Now, In the top bar of eclipse, Select Project --> then hit "Build Project". (This step is needed as sometimes eclipse may not "build project" automatically!)
+7. Now you should be able to run the "Scrabble" game by running the "Scrabble Runner".
+8. Please let us know if you run into any issues.
 
 ## How to run in Eclipse (Method-2)
 1. Add JavaSE-11.0.7 library.
