@@ -1,4 +1,5 @@
 package scrabble;
+
 import java.util.*;
 /**
  * Class ScoreKeeper
@@ -8,8 +9,6 @@ import java.util.*;
  */
 public class ScoreKeeper {
     private HashMap<String, Integer> playerScores;
-    //private String name;
-    //private int score;
     
     /**
      * Constructor for Score Keeper
@@ -50,8 +49,4 @@ public class ScoreKeeper {
     public HashMap<String, Integer> getPlayerScores() {
         return playerScores;
     }   
-
-
-
-
 }

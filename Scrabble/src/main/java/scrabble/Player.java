@@ -14,27 +14,12 @@ public class Player {
     private int numLettersToReplace;
     private ArrayList<Letter> currentLetterTray;    
     private ArrayList<String> currentLetterTrayInString;     
-    //private ArrayList<Letter> newLetterTray;
     private ArrayList<Letter> newLetters; 
     private int errorChancesPerTurn;
-    
+
     /**
      * Constructor for Player
-     */ /*
-    public Player(String playerName, int numTurn, int updatedScore, int wordScore, ArrayList<String> words) {
-        name = playerName;        
-        wordSelectionsPerTurn = new HashMap<>();
-        wordScores = new ArrayList<Integer>();
-        totalScore += updatedScore;
-        wordScores.add(wordScore);   
-        if (!words.equals()) {
-            
-        }
-        wordSelectionsPerTurn.put(numTurn, words); 
-        currentLetterTray = new ArrayList<String>();
-        newLetterTray = new ArrayList<String>();        
-    } */
-    
+     */
     public Player(String playerName) { 
         name = playerName;
         currentLetterTray = new ArrayList<Letter>();
@@ -115,6 +100,4 @@ public class Player {
     public void setErrorChancesPerTurn(int errors) {             
         errorChancesPerTurn = errors;        
     }       
-    
-
 }

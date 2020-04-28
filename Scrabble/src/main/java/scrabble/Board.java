@@ -144,9 +144,7 @@ public class Board {
             } 
         }          
     }    
-    
-    
-    
+       
     /**
      * Sends out the data for the current Board
      */

@@ -96,7 +96,5 @@ public class Letter {
      */
     public int getLetterScore() {
         return letterScore;
-    }
-    
-    
+    }   
 }

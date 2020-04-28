@@ -1,20 +1,16 @@
 package scrabble;
 
-//import java.util.Scanner;
 import java.util.*;
 
 /**
- * This is the ScrabbleGame class
+ * This is the ScrabbleGame class, with scrabbleAlgo() which has the main Scrabble Algorithm
  * 
  * @author CIT-591 Team-35 Project
  *
  */
 public class ScrabbleGame {
-
-    private boolean playing;
-    private Random rand;
-    private int startPosition;
-    private int allowedErrorChances;
+    
+    private int startPosition; // Start position for the Game. The first word must include this position in the Scrabble Board
 
     // Variables for Dictionary reference, for word check
     private Dictionary dictionary;
@@ -23,14 +19,14 @@ public class ScrabbleGame {
     // Variables for info on all Players: names, wordSelections
     private ArrayList<Player> players;
 
-    private boolean singlePlayerGame;
+    //private boolean singlePlayerGame;
     private Player currentPlayer;
     private int playerIndex;
 
     // Variables for Board status
     private Board board;
     private ArrayList<Cell[]> display;
-    private ArrayList<Cell[]> testNewBoard;
+    //private ArrayList<Cell[]> testNewBoard;
     private boolean firstWordTaken;
     private boolean newWordsError;
     private ArrayList<Cell> newBoardPositionCells;
@@ -44,58 +40,33 @@ public class ScrabbleGame {
     private int maxVertWordPosition = -1;      
     private int minHorWordPosition = 999;
     private int maxHorWordPosition = -1;    
-    //private int minHorPositionOfWord = 999;
-    //private int maxHorPositionOfWord = -1;      
-    //private int minPositionOfLetters;
-    //private int maxPositionOfLetters;    
-    // private boolean checkSurroundingPositions;
     StringBuilder newWord;
     private int newLettersOnlyScore;
     private int newWordScore;
     private int newTotalScore;
     private int wordMultiplier;
     private int letterMultiplier;
-
-    // private boolean refillLetterTray;
     private BagOfLetters bagOfLetters;
     public ScoreKeeper scoreKeeper;
     private ArrayList<Letter> tempLetterTray;
-
-    // private Letter currentLetter;
-    // private String[] words;
-
     private boolean endGame;
-    // private GUI gui;
-    private int currentPlayerWordScore;
     private ArrayList<String> currentPlayerWords;
-    private int currentPlayerTotalScore;
-    private HashMap<String, Integer> allPlayerScores;
-    // private ArrayList<Integer> allPlayerScores;
+    private boolean debugPrint;
 
     /**
      * ScrabbleGame Constructor
-     * 
-     * @param option
+     * @param allPlayerNames : This is the list of the names of the Players playing this Game
      */
-    // public ScrabbleGame(int option, ArrayList<Player> allPlayers) {
     public ScrabbleGame(ArrayList<String> allPlayerNames) {
-        playing = true;
-        rand = new Random();
-        createDictionary(); // Creating Dictionary for exhaustive word reference
-
-        bagOfLetters = new BagOfLetters();
+        createDictionary(); // Creating Dictionary for exhaustive word reference for this Game
+        bagOfLetters = new BagOfLetters(); // Initializing the Bag of Letters to shuffle and pick
         board = new Board(); // Initializing Board, and sending status of board to GUI
-
         initializePlayers(allPlayerNames); // Initializing Players playing this game
-        playerIndex = 0;
-        currentPlayer = players.get(playerIndex);
-
-        // Initializing Score Keeper
-        scoreKeeper = new ScoreKeeper();
-
+        playerIndex = 0; // Needed to keep track of Players playing the game
+        currentPlayer = players.get(playerIndex); // Gives the current player in this game.       
+        scoreKeeper = new ScoreKeeper(); // Initializing Score Keeper
         firstWordTaken = false;
         newWordsError = false;
-
         newBoardPositionCells = new ArrayList<Cell>();
         newBoardLetters = new ArrayList<Letter>();
         verticalLetters = false;
@@ -110,13 +81,17 @@ public class ScrabbleGame {
         currentPlayerWords = new ArrayList<String>();
         newWord = new StringBuilder();
         startPosition = 112;
-        allowedErrorChances = 2;
+        //allowedErrorChances = 2;
         tempLetterTray = new ArrayList<Letter>();
         newLettersOnlyScore = 0;
         newWordScore = 0;
         endGame = false;
+        debugPrint = false;
     }
 
+    /**
+     * method to create the Dictionary object and its methods
+     */
     public void createDictionary() {
         // Creating reference Dictionary for error-check with word choices.
         // NOTE: Remove or Ignore ln-1 and ln-2 when referencing this
@@ -128,56 +103,51 @@ public class ScrabbleGame {
         dictionaryWords.remove(0);
     }
 
+    /**
+     * method to instantiate all the Player objects
+     * @param playerNames : This is the list of the names of the Players playing this Game
+     */
     public void initializePlayers(ArrayList<String> playerNames) {
-
-        singlePlayerGame = true; // Initial assumption. To be changed if more than one player is playing
         // Initializing all the players for this game.
         // Initial draft allows 2 Players, but final version may allow upto 4 Players.
         // Show error if more than 4 Players!!!
         players = new ArrayList<Player>();
-
-        if (playerNames.size() > 1)
-            singlePlayerGame = false;
 
         for (int i = 0; i < playerNames.size(); i++) {
             Player player = new Player(playerNames.get(i));
             players.add(player);
             player.setCurrentLetterTray(bagOfLetters.shuffleAndPickLetters(7));
         }
-
     }
 
-
     /**
-     * This method checks the word selection of the current Player, and returns an
-     * error if wrong, else updates the current Players tray, and updates the Board
-     * in the game of 'Scrabble'
+     * This method playEvent() is called when the Player hits submit in the GUI. This method then calls scrabbleAlgo which handles the 
+     * algorithm associated with this Scrabble Game
+     * @param boardPositions : provides positions in the Board that corresponds to the Letters added in the Board
+     * @param boardLetters : provides Letters in the Board that corresponds to the Positions ArrayList
+     * @return
      */
     public boolean playEvent(ArrayList<Integer> boardPositions, ArrayList<String> boardLetters) {
 
         newWordsError = false;
-        testNewBoard = new ArrayList<Cell[]>();
-        testNewBoard = board.getCurrentBoard();
         newBoardPositionCells.clear();
         newBoardLetters.clear();
         minPositionOfBoard = 999;
         maxPositionOfBoard = -1;
-        //minPositionOfLetters = 999;
-        //maxPositionOfLetters = -1;        
-        //ArrayList<Boolean> lettersFlag = new ArrayList<Boolean>();
-
         singleLetter = false;
         verticalLetters = false;
         horizontalLetters = false;
+        debugPrint = true;
 
-        //Used for sorting the provided positions and letters
+        //Using HashMap for sorting the provided positions and letters
         HashMap<Integer, String> sortingLetters = new HashMap<Integer, String>();
-
         for (int i = 0; i< boardPositions.size(); i++) {
             sortingLetters.put(boardPositions.get(i), boardLetters.get(i));  
-            System.out.println("Before Sorting Board Letters");      
-            System.out.print(boardPositions.get(i) + " ");            
-            System.out.println(boardLetters.get(i) + " ");            
+            if (debugPrint) {
+                System.out.println("Before Sorting Board Letters");      
+                System.out.print(boardPositions.get(i) + " ");            
+                System.out.println(boardLetters.get(i) + " "); 
+            }           
         }
       
         //Sorting the positions and letters
@@ -185,25 +155,34 @@ public class ScrabbleGame {
         boardLetters.clear();
         for (int i = 0; i< boardPositions.size(); i++) {
             boardLetters.add(sortingLetters.get(boardPositions.get(i)));  
-            System.out.println("Sorting sent Board Letters");
+            if (debugPrint) {
+                System.out.println("Sorting sent Board Letters");
+            }
         }        
         
-        for (int i = 0; i< boardPositions.size(); i++) { 
-            System.out.print(boardPositions.get(i) + " ");            
-            System.out.println(boardLetters.get(i) + " ");           
-        }              
+        if (debugPrint) {
+            for (int i = 0; i< boardPositions.size(); i++) { 
+                System.out.print(boardPositions.get(i) + " ");            
+                System.out.println(boardLetters.get(i) + " ");           
+            }            
+        }           
 
         // Finding if the letters are vertical or horizontal or a single letter
+        // NOTE: Having both Vertical and Horizontal Letters is invalid in this Scrabble Game
         if (boardPositions.size() < 2) {
             singleLetter = true;
         } else if (((boardPositions.get(1) - boardPositions.get(0)) % 15) == 0) {
             verticalLetters = true;
             //Check if all letters are all vertical letters, else invalid (not supported by this game)
             for (int i = 0; i < (boardPositions.size() - 1); i++) { 
-                System.out.println("Board Position (i + 1) for Vert Letter : " + boardPositions.get(i + 1));     
-                System.out.println("Board Position (i) for Vert Letter : " + boardPositions.get(i));                 
+                if (debugPrint) {
+                    System.out.println("Board Position (i + 1) for Vert Letter : " + boardPositions.get(i + 1));     
+                    System.out.println("Board Position (i) for Vert Letter : " + boardPositions.get(i));                     
+                }                
                 if (((boardPositions.get(i + 1) - boardPositions.get(i)) % 15) != 0) {  
-                    System.out.println("Horizontal Letters included with Vertical Letters : Invalid");                    
+                    if (debugPrint) {
+                        System.out.println("Horizontal Letters included with Vertical Letters : Invalid");                           
+                    }                
                     newWordsError = true; 
                 }
             }
@@ -211,21 +190,23 @@ public class ScrabbleGame {
             horizontalLetters = true;
             //Check if all letters are all horizontal letters, else invalid (not supported by this game)            
             for (int i = 0; i < (boardPositions.size() - 1); i++) { 
-                System.out.println("Board Position (i + 1) for Hor Letter : " + boardPositions.get(i + 1));     
-                System.out.println("Board Position (i) for Hor Letter : " + boardPositions.get(i));   
-                System.out.println("Board Position (i + 1)/15 for Hor Letter : " + (boardPositions.get(i + 1)/15));     
-                System.out.println("Board Position (i)/15 for Hor Letter : " + (boardPositions.get(i)/15));                 
-                //if ((boardPositions.get(i + 1) - boardPositions.get(i)) > 14) {
-                if ((boardPositions.get(i + 1)/15) != (boardPositions.get(i)/15)) {                  
-                    System.out.println("Vertical Letters included with Horizontal Letters : Invalid");                    
+                if (debugPrint) {
+                    System.out.println("Board Position (i + 1) for Hor Letter : " + boardPositions.get(i + 1));     
+                    System.out.println("Board Position (i) for Hor Letter : " + boardPositions.get(i));   
+                    System.out.println("Board Position (i + 1)/15 for Hor Letter : " + (boardPositions.get(i + 1)/15));     
+                    System.out.println("Board Position (i)/15 for Hor Letter : " + (boardPositions.get(i)/15));                     
+                }               
+                if ((boardPositions.get(i + 1)/15) != (boardPositions.get(i)/15)) { 
+                    if (debugPrint) {
+                        System.out.println("Vertical Letters included with Horizontal Letters : Invalid");                         
+                    }                  
                     newWordsError = true; 
                 }                
             }            
         }
 
-        // Get word selections from current player, and checkError
-        // Get word Selections
-        // Case-1: 1st word in the Board. Can be handled by GUI itself
+        // Get word selections from current player, and checkError using the Scrabble Algorithm "scrabbleAlgo()"
+        //Check is the very first word on the Board includes the "startPosition" Cell, which is mandatory for this game!
         if (!newWordsError) {
             if (!board.getCell(startPosition).getPositionTaken()) {
                 for (int i = 0; i < boardPositions.size(); i++) {
@@ -233,20 +214,14 @@ public class ScrabbleGame {
                         firstWordTaken = true;
                     }
                 }
-                /*
-                 * if (firstWordTaken) { board.getCell(startPosition).setPositionTaken(true); }
-                 */
             }           
         }
 
-
+        //If the first word is already placed in the startPosition, the remaining game goes forward using the scrabbleAlgo() method 
         if (firstWordTaken && (!newWordsError)) {
-            // if (board.getCell(startPosition).getPositionTaken()) {
             // Converting to Cell, and getLetters
             for (int i = 0; i < boardPositions.size(); i++) {
-                // board.getCell(boardPositions.get(i)).setPositionTaken(true);
                 Letter tempLetter = new Letter(boardLetters.get(i));
-                // board.getCell(boardPositions.get(i)).setLetter(tempLetter);
                 newBoardPositionCells.add(board.getCell(boardPositions.get(i)));
                 newBoardLetters.add(tempLetter);
                 // find minPosition, and max position
@@ -258,14 +233,20 @@ public class ScrabbleGame {
                 }
             }
             
-            //Call the Scrabble Algorithm, and get word list
-            System.out.println("Calling Scrabble Algorithm : ");
-            scrabbleAlgo(boardPositions, boardLetters); //
+            if (debugPrint) {
+                System.out.println("Calling Scrabble Algorithm : ");                
+            }
+            
+            //Calling the Scrabble Algorithm method "scrabbleAlgo()"        
+            scrabbleAlgo(boardPositions, boardLetters); 
+            
             // Check words against dictionary for errorCheck
             if (!newWordsError) {
-                for (int j = 0; j < currentPlayerWords.size(); j++) {
-                    System.out.println("Word-" + j + " : " + currentPlayerWords.get(j));
-                }               
+                if (debugPrint) {
+                    for (int j = 0; j < currentPlayerWords.size(); j++) {
+                        System.out.println("Word-" + j + " : " + currentPlayerWords.get(j));
+                    }                     
+                }             
             } else {
                 for (int i = 0; i < boardPositions.size(); i++) {
                     if (boardPositions.get(i) == startPosition) {
@@ -273,30 +254,19 @@ public class ScrabbleGame {
                     }
                 }                
             }
-            //newWordsError = checkError(currentPlayerWords); // if error, set newWordsError = true;
         } else {
             newWordsError = true;
         }
 
-        if (newWordsError) { // This happens if the first word selected is NOT in the dictionary
-            //currentPlayer.setErrorChancesPerTurn(1 + currentPlayer.getErrorChancesPerTurn());
-            // Reset all positions Taken
+        if (newWordsError) { 
+            // Reset all positions Taken, since the words used were not in the dictionary, and hence invalid!
             for (int i = 0; i < boardPositions.size(); i++) {
                 board.getCell(boardPositions.get(i)).setPositionTaken(false);
-                //board.getCell(boardPositions.get(i)).setLetter(null);
-                //board.getCell(boardPositions.get(i)).setVerticalWord(null);
                 board.getCell(boardPositions.get(i)).setVerticalScore(0);
-                //board.getCell(boardPositions.get(i)).setHorizontalWord(null);
                 board.getCell(boardPositions.get(i)).setHorizontalScore(0);
             }
-            // if (currentPlayer.getErrorChancesPerTurn() == allowedErrorChances) {
-            //     currentPlayer.setErrorChancesPerTurn(0);
-            //     newWordsError = false;
-            //     changePlayer();
-            // }
         } 
         else {
-            // tempLetterTray.clear();
             tempLetterTray = currentPlayer.getCurrentLetterTray();
             for (int i = 0; i < boardLetters.size(); i++) {
                 boolean checkedLetter = false;
@@ -321,12 +291,18 @@ public class ScrabbleGame {
             int tempTotalScore = currentPlayer.getTotalScore();
             currentPlayer.setTotalScore(newTotalScore + tempTotalScore);
             newWordsError = false;
-            // changePlayer();
         }
-        System.out.println("New Word Error returned from playEvent : " + newWordsError);    
+        if (debugPrint) {
+            System.out.println("New Word Error returned from playEvent : " + newWordsError);             
+        } 
         return newWordsError;
     }    
 
+    /**
+     * private "scrabbleAlgo()" method which contains the algorithm used to handle the Scrabble Game
+     * @param sorted positions : sent by the playEvent() method
+     * @param sorted letters : sent by the playEvent() method
+     */
     private void scrabbleAlgo(ArrayList<Integer> positions, ArrayList<String> letters) {
         currentPlayerWords.clear();
         ArrayList<Integer> tempPositions = new ArrayList<Integer>();
@@ -334,7 +310,6 @@ public class ScrabbleGame {
         for (int i = 0; i < positions.size(); i++) {
             tempPositions.add(positions.get(i));
         }
-        //tempPositions = positions;
         tempLetters = letters;
         newLettersOnlyScore = 0;
         newWordScore = 0;
@@ -346,14 +321,18 @@ public class ScrabbleGame {
         }
         // Check word from minPosition to maxPosition
         if (verticalLetters) {
-            System.out.println("Min Position of Board for Single Letter is : " + minPositionOfBoard);
-            System.out.println("Max Position of Board for Single Letter is : " + maxPositionOfBoard);     
-            System.out.println("Vertical Word for Min Position is : " + board.getCell(minPositionOfBoard - 15).getVerticalWord());
-            System.out.println("Vertical Word for Max Position is : " + board.getCell(maxPositionOfBoard + 15).getVerticalWord());
-            System.out.println("Horizontal Word for Min Position is : " + board.getCell(minPositionOfBoard - 1).getHorizontalWord());
-            System.out.println("Horizontal Word for Max Position is : " + board.getCell(maxPositionOfBoard + 1).getHorizontalWord());  
-
-            boolean vertWordExists = false;            
+            if (debugPrint) {
+                System.out.println("Min Position of Board for Single Letter is : " + minPositionOfBoard);
+                System.out.println("Max Position of Board for Single Letter is : " + maxPositionOfBoard);     
+                System.out.println("Vertical Word for Min Position is : " + board.getCell(minPositionOfBoard - 15).getVerticalWord());
+                System.out.println("Vertical Word for Max Position is : " + board.getCell(maxPositionOfBoard + 15).getVerticalWord());
+                System.out.println("Horizontal Word for Min Position is : " + board.getCell(minPositionOfBoard - 1).getHorizontalWord());
+                System.out.println("Horizontal Word for Max Position is : " + board.getCell(maxPositionOfBoard + 1).getHorizontalWord());                
+            }
+ 
+            boolean vertWordExists = false; 
+            
+            //Calling the "scrabbleAlgo-helper method" for vertical Letters, when at the beginning of the vertical word            
             vertWordExists = scrabbleAlgoVertWordMinPosHelper(vertWordExists, minPositionOfBoard); 
             int len = 1 + ((maxPositionOfBoard - minPositionOfBoard) / 15);
             int position = (positions.get(0) - 15);
@@ -362,7 +341,10 @@ public class ScrabbleGame {
                 if ((position + 15) == tempPositions.get(i)) {
                     newWord.append(tempLetters.get(i));
                     String tempCellValue = board.getCell(tempPositions.get(i)).getCellValues();
+                    
+                    //Calling helper method to find the multiplier (Word or Letter) to be used based on the position of the letter                    
                     scrabbleAlgoMultiplierHelper(tempCellValue);
+                    
                     Letter tempLetter = new Letter(tempLetters.get(i));
                     newLettersOnlyScore += tempLetter.convertNameToValue(tempLetters.get(i)); 
                     newWordScore += letterMultiplier * tempLetter.convertNameToValue(tempLetters.get(i));
@@ -379,14 +361,16 @@ public class ScrabbleGame {
                 position = position + 15;
             }
             
-            vertWordExists = true; //Always true, when it has already been decided to have vertical letters
+            vertWordExists = true; //Always true at the end of the word, when it has already been decided to have vertical letters
+            
+            //Calling the "scrabbleAlgo-helper method" for vertical Letters, when at the end of the vertical word
             scrabbleAlgoVertWordMaxPosHelper(vertWordExists, maxPositionOfBoard);
 
             ///////////////////////////////////////////////////////////////////////////////////////
 
-            /////////// Now find the remaining horizontal words ///////////     
+            /////////// Now finding the remaining horizontal words, that apply to this Vertical word ///////////     
             if (!newWordsError) {
-                len = positions.size(); // resizing len to only new letters added in board
+                len = positions.size(); // resizing "len" to only new letters added in board
                 boolean horWordExists;
                 for (int i = 0; i < len; i++) {
                     if (!newWordsError) {                    
@@ -399,15 +383,20 @@ public class ScrabbleGame {
                             newWord.delete(0, newWord.length());
                         }
 
+                        //Calling the "scrabbleAlgo-helper method" for horizontal Letters, when at the beginning of the horizontal word                        
                         horWordExists = scrabbleAlgoHorWordMinPosHelper(horWordExists, positions.get(i));       
 
                         newWord.append(letters.get(i));
                         String tempCellValue = board.getCell(positions.get(i)).getCellValues();
+                        
+                        //Calling helper method to find the multiplier (Word or Letter) to be used based on the position of the letter                        
                         scrabbleAlgoMultiplierHelper(tempCellValue);
+                        
                         Letter tempLetter = new Letter(letters.get(i));
                         newLettersOnlyScore += tempLetter.convertNameToValue(letters.get(i)); 
                         newWordScore += letterMultiplier * tempLetter.convertNameToValue(letters.get(i));
 
+                        //Calling the "scrabbleAlgo-helper method" for horizontal Letters, when at the end of the horizontal word                         
                         scrabbleAlgoHorWordMaxPosHelper(horWordExists, positions.get(i)); 
                     }
                 }                
@@ -415,7 +404,10 @@ public class ScrabbleGame {
         } else if (horizontalLetters) {
             
             boolean horWordExists = false;
+            
+            //Calling the "scrabbleAlgo-helper method" for horizontal Letters, when at the beginning of the horizontal word             
             horWordExists = scrabbleAlgoHorWordMinPosHelper(horWordExists, minPositionOfBoard);
+            
             int len = 1 + (maxPositionOfBoard - minPositionOfBoard);
             int position = (positions.get(0) - 1);
      
@@ -423,7 +415,10 @@ public class ScrabbleGame {
                 if ((position + 1) == tempPositions.get(i)) {
                     newWord.append(tempLetters.get(i));
                     String tempCellValue = board.getCell(tempPositions.get(i)).getCellValues();
+                    
+                    //Calling helper method to find the multiplier (Word or Letter) to be used based on the position of the letter                    
                     scrabbleAlgoMultiplierHelper(tempCellValue);
+                    
                     Letter tempLetter = new Letter(tempLetters.get(i));
                     newLettersOnlyScore += tempLetter.convertNameToValue(tempLetters.get(i)); 
                     newWordScore += letterMultiplier * tempLetter.convertNameToValue(tempLetters.get(i));
@@ -440,7 +435,9 @@ public class ScrabbleGame {
                 position = position + 1;
             }
             
-            horWordExists = true; //Always true, when it has already been decided to have vertical letters            
+            horWordExists = true; //Always true, when it has already been decided to have vertical letters  
+            
+            //Calling the "scrabbleAlgo-helper method" for horizontal Letters, when at the end of the horizontal word             
             scrabbleAlgoHorWordMaxPosHelper(horWordExists, maxPositionOfBoard);              
             ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -459,15 +456,20 @@ public class ScrabbleGame {
                             newWord.delete(0, newWord.length());
                         }
 
+                        //Calling the "scrabbleAlgo-helper method" for vertical Letters, when at the beginning of the vertical word                        
                         vertWordExists = scrabbleAlgoVertWordMinPosHelper(vertWordExists, positions.get(i));                  
 
                         newWord.append(letters.get(i));
                         String tempCellValue = board.getCell(positions.get(i)).getCellValues();
+                        
+                        //Calling helper method to find the multiplier (Word or Letter) to be used based on the position of the letter                         
                         scrabbleAlgoMultiplierHelper(tempCellValue);
+                        
                         Letter tempLetter = new Letter(letters.get(i));
                         newLettersOnlyScore += tempLetter.convertNameToValue(letters.get(i)); 
                         newWordScore += letterMultiplier * tempLetter.convertNameToValue(letters.get(i));
 
+                        //Calling the "scrabbleAlgo-helper method" for vertical Letters, when at the end of the vertical word                        
                         scrabbleAlgoVertWordMaxPosHelper(vertWordExists, positions.get(i));  
                     }
                 }
@@ -475,13 +477,17 @@ public class ScrabbleGame {
         } else if (singleLetter) {
             /////////// Find Vertical Word ///////////            
             boolean vWordExists = false;
-            System.out.println("Min Position of Board for Single Letter is : " + minPositionOfBoard);
-            System.out.println("Max Position of Board for Single Letter is : " + maxPositionOfBoard);     
-            System.out.println("Vertical Word for Min Position is : " + board.getCell(minPositionOfBoard - 15).getVerticalWord());
-            System.out.println("Vertical Word for Max Position is : " + board.getCell(maxPositionOfBoard + 15).getVerticalWord());
-            System.out.println("Horizontal Word for Min Position is : " + board.getCell(minPositionOfBoard - 1).getHorizontalWord());
-            System.out.println("Horizontal Word for Max Position is : " + board.getCell(maxPositionOfBoard + 1).getHorizontalWord());             
-
+            
+            if (debugPrint) {
+                System.out.println("Min Position of Board for Single Letter is : " + minPositionOfBoard);
+                System.out.println("Max Position of Board for Single Letter is : " + maxPositionOfBoard);     
+                System.out.println("Vertical Word for Min Position is : " + board.getCell(minPositionOfBoard - 15).getVerticalWord());
+                System.out.println("Vertical Word for Max Position is : " + board.getCell(maxPositionOfBoard + 15).getVerticalWord());
+                System.out.println("Horizontal Word for Min Position is : " + board.getCell(minPositionOfBoard - 1).getHorizontalWord());
+                System.out.println("Horizontal Word for Max Position is : " + board.getCell(maxPositionOfBoard + 1).getHorizontalWord());               
+            }
+             
+            //Calling the "scrabbleAlgo-helper method" for vertical Letters, when at the beginning of the vertical word             
             vWordExists = scrabbleAlgoVertWordMinPosHelper(vWordExists, minPositionOfBoard);             
             
             newWord.append(tempLetters.get(0));
@@ -489,13 +495,15 @@ public class ScrabbleGame {
             wordMultiplier = 1;
             letterMultiplier = 1;   
             
+            //Calling helper method to find the multiplier (Word or Letter) to be used based on the position of the letter             
             scrabbleAlgoMultiplierHelper(tempCellValue);
             
             Letter tempLetter = new Letter(tempLetters.get(0));
-            // This does not include the letter or word multiplier            
+            // The LettersOnlyScore does not include the letter or word multiplier, as it is used for later reference           
             newLettersOnlyScore += tempLetter.convertNameToValue(tempLetters.get(0)); 
             newWordScore += letterMultiplier * tempLetter.convertNameToValue(tempLetters.get(0));
            
+            //Calling the "scrabbleAlgo-helper method" for vertical Letters, when at the end of the vertical word             
             scrabbleAlgoVertWordMaxPosHelper(vWordExists, maxPositionOfBoard);
 
             /////////// Find Horizontal Word ///////////
@@ -509,20 +517,31 @@ public class ScrabbleGame {
                     newWord.delete(0, newWord.length());
                 }
 
+                //Calling the "scrabbleAlgo-helper method" for horizontal Letters, when at the beginning of the horizontal word                 
                 hWordExists = scrabbleAlgoHorWordMinPosHelper(hWordExists, minPositionOfBoard);             
                 newWord.append(tempLetters.get(0));
+                
+                //Calling helper method to find the multiplier (Word or Letter) to be used based on the position of the letter                
                 scrabbleAlgoMultiplierHelper(tempCellValue);            
 
-                // This does not include the letter or word multiplier
+                // The LettersOnlyScore does not include the letter or word multiplier
                 newLettersOnlyScore += tempLetter.convertNameToValue(tempLetters.get(0));                                                                                       
                 newWordScore += letterMultiplier * tempLetter.convertNameToValue(tempLetters.get(0));
 
+                //Calling the "scrabbleAlgo-helper method" for horizontal Letters, when at the end of the horizontal word                 
                 scrabbleAlgoHorWordMaxPosHelper(hWordExists, maxPositionOfBoard);   
             }
         }
-        System.out.println("New Word Error returned from scrabbleAlgo : " + newWordsError);              
+        if (debugPrint) {
+            System.out.println("New Word Error returned from scrabbleAlgo : " + newWordsError);  
+        }            
     }
     
+    /**
+     * This is one of 5 helper methods for "scrabbleAlgo" to implement the DRY principle in scrabbleAlgo. 
+     * This method finds the multiplier required for the word Scores
+     * @param cellValue : This gives the multiplier required for the word Scores 
+     */
     public void scrabbleAlgoMultiplierHelper(String cellValue) {
         System.out.println("Entering Multiplier Helper");        
         String tempCellValue = cellValue;
@@ -537,10 +556,19 @@ public class ScrabbleGame {
         }        
     }
 
-    public boolean scrabbleAlgoVertWordMinPosHelper(boolean vWord, int minPosition) {  
-        System.out.println("Entering Vertical Word Min Position Helper");
-        boolean vWordExists = vWord; //false;              
-        if (minPosition > 14) { //(14 + 1)) {                  
+    /**
+     * This is one of 5 helper methods for "scrabbleAlgo" to implement the DRY principle in scrabbleAlgo. 
+     * This method finds all the words, letterOnly scores (for later reference), and the word scores, 
+     * based on the letters for Vertical min positions chosen by the Player
+     * @param vWord (boolean) : scrabbleAlgo() tells the helper method whether atleast a partial/full vertical word exists
+     * @param minPosition (int) : scrabbleAlgo() sends the current min Position for this word, which may change during the course of this algorithm
+     */
+    public boolean scrabbleAlgoVertWordMinPosHelper(boolean vWord, int minPosition) { 
+        if (debugPrint) {
+            System.out.println("Entering Vertical Word Min Position Helper");
+        }
+        boolean vWordExists = vWord;              
+        if (minPosition > 14) {                 
             if (board.containsVerticalWord(minPosition - 15)) {                   
                 System.out.println("vWordExists at minPositionBoard - 15");                     
                 minVertWordPosition = board.getCell(minPosition - 15).getMinVertPositionOfWord();                 
@@ -548,11 +576,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(minVertWordPosition).getVerticalScore();
                 newWordScore += board.getCell(minVertWordPosition).getVerticalScore();
                 
-                System.out.println("vWordExists at minPositionBoard - 15");                      
-                System.out.println("minVertWordPosition :" + minVertWordPosition); 
-                System.out.println("newWord :" + newWord);                     
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                      
+                if (debugPrint) {
+                    System.out.println("vWordExists at minPositionBoard - 15");                      
+                    System.out.println("minVertWordPosition :" + minVertWordPosition); 
+                    System.out.println("newWord :" + newWord);                     
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore);                    
+                }                    
                 vWordExists = true;             
             } else if (board.getCell(minPosition - 15).getPositionTaken()) {
                 minVertWordPosition = minPosition - 15;                
@@ -560,11 +590,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(minVertWordPosition).getVerticalScore();
                 newWordScore += board.getCell(minVertWordPosition).getVerticalScore();                    
                 
-                System.out.println("vLetterExists at minPositionBoard - 15");  
-                System.out.println("minVertWordPosition :" + minVertWordPosition);                 
-                System.out.println("newWord :" + newWord); 
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                      
+                if (debugPrint) {
+                    System.out.println("vLetterExists at minPositionBoard - 15");  
+                    System.out.println("minVertWordPosition :" + minVertWordPosition);                 
+                    System.out.println("newWord :" + newWord); 
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore);                      
+                }                  
                 vWordExists = true;                    
             } else {
                 minVertWordPosition = minPosition;                
@@ -574,9 +606,18 @@ public class ScrabbleGame {
         }        
         return vWordExists;
     }
-    
+   
+    /**
+     * This is one of 5 helper methods for "scrabbleAlgo" to implement the DRY principle in scrabbleAlgo. 
+     * This method finds all the words, letterOnly scores (for later reference), and the word scores, 
+     * based on the letters for Vertical max positions chosen by the Player
+     * @param vWord (boolean) : scrabbleAlgo() tells the helper method whether atleast a partial/full vertical word exists
+     * @param maxPosition (int) : scrabbleAlgo() sends the current max Position for this word, which may change during the course of this algorithm
+     */
     public void scrabbleAlgoVertWordMaxPosHelper(boolean vWord, int maxPosition) { 
-        System.out.println("Entering Vertical Word Max Position Helper");        
+        if (debugPrint) {
+            System.out.println("Entering Vertical Word Max Position Helper");    
+        }    
         boolean vWordExists = vWord;           
         if (maxPosition < 210) { //(210 + 1)) {        
             if (board.containsVerticalWord(maxPosition + 15)) {                               
@@ -585,11 +626,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(maxVertWordPosition).getVerticalScore();
                 newWordScore += board.getCell(maxVertWordPosition).getVerticalScore(); 
                 
-                System.out.println("vWordExists at maxPositionBoard + 15");                      
-                System.out.println("maxVertWordPosition :" + maxVertWordPosition); 
-                System.out.println("newWord :" + newWord);                     
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                       
+                if (debugPrint) {
+                    System.out.println("vWordExists at maxPositionBoard + 15");                      
+                    System.out.println("maxVertWordPosition :" + maxVertWordPosition); 
+                    System.out.println("newWord :" + newWord);                     
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore); 
+                }                      
                 vWordExists = true;   
             } else if (board.getCell(maxPosition + 15).getPositionTaken()) {                   
                 maxVertWordPosition = maxPosition + 15;                
@@ -597,11 +640,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(maxVertWordPosition).getVerticalScore();
                 newWordScore += board.getCell(maxVertWordPosition).getVerticalScore();                     
                 
-                System.out.println("vLetterExists at maxPositionBoard + 15");  
-                System.out.println("maxVertWordPosition :" + maxVertWordPosition);                     
-                System.out.println("newWord :" + newWord);  
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                    
+                if (debugPrint) {
+                    System.out.println("vLetterExists at maxPositionBoard + 15");  
+                    System.out.println("maxVertWordPosition :" + maxVertWordPosition);                     
+                    System.out.println("newWord :" + newWord);  
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore); 
+                }                   
                 vWordExists = true;                    
             } else {
                 maxVertWordPosition = maxPosition;                
@@ -614,7 +659,10 @@ public class ScrabbleGame {
             String checkWordVert = newWord.toString();
             newWordsError = !checkWordExists(checkWordVert); // if error, set newWordsError = true;        
             if (!newWordsError) {
-                //if (vWordExists) {
+                if (debugPrint) {
+                    System.out.println("vWordExists : ");              
+                    System.out.println("Setting newLetterOnlyScore : " + newLettersOnlyScore); 
+                }                
                 board.getCell(minVertWordPosition).setVerticalWord(newWord.toString());                
                 board.getCell(maxVertWordPosition).setVerticalWord(newWord.toString());                
                 board.getCell(minVertWordPosition).setVerticalScore(newLettersOnlyScore);                
@@ -624,18 +672,29 @@ public class ScrabbleGame {
                 currentPlayerWords.add(newWord.toString());              
                 newWordScore = newWordScore * wordMultiplier;
                 newTotalScore += newWordScore;                                
-                //} 
             }
         }
-        System.out.println("New Word Error : " + newWordsError);        
-        System.out.println("Min Position of Board for Vertical Word is : " + minVertWordPosition);
-        System.out.println("Max Position of Board for Vertical Word is : " + maxVertWordPosition);     
-        System.out.println("Vertical Word for Min Position is : " + board.getCell(minVertWordPosition).getVerticalWord());
-        System.out.println("Vertical Word for Max Position is : " + board.getCell(maxVertWordPosition).getVerticalWord());         
+        if (debugPrint) {
+            System.out.println("New Word Error : " + newWordsError);        
+            System.out.println("Min Position of Board for Vertical Word is : " + minVertWordPosition);
+            System.out.println("Max Position of Board for Vertical Word is : " + maxVertWordPosition);     
+            System.out.println("Vertical Word for Min Position is : " + board.getCell(minVertWordPosition).getVerticalWord());
+            System.out.println("Vertical Word for Max Position is : " + board.getCell(maxVertWordPosition).getVerticalWord()); 
+        }        
     }    
     
+    /**
+     * This is one of 5 helper methods for "scrabbleAlgo" to implement the DRY principle in scrabbleAlgo. 
+     * This method finds all the words, letterOnly scores (for later reference), and the word scores, 
+     * based on the letters for Horizontal min positions chosen by the Player
+     * @param hWord (boolean) : scrabbleAlgo() tells the helper method whether atleast a partial/full vertical word exists
+     * @param minPosition (int) : scrabbleAlgo() sends the current min Position for this word, which may change during the course of this algorithm
+     * @return returns true of a Horizontal word exists
+     */
     public boolean scrabbleAlgoHorWordMinPosHelper(boolean hWord, int minPosition) {
-        System.out.println("Entering Horizontal Word Min Position Helper");        
+        if (debugPrint) {
+            System.out.println("Entering Horizontal Word Min Position Helper");    
+        }    
         boolean hWordExists = hWord; //false;        
         if ((minPosition % 15) > 0) {        
             if (board.containsHorizontalWord(minPosition - 1)) {              
@@ -644,11 +703,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(minHorWordPosition).getHorizontalScore();
                 newWordScore += board.getCell(minHorWordPosition).getHorizontalScore();
                 
-                System.out.println("hWordExists at minPositionBoard - 1");                      
-                System.out.println("minHorWordPosition :" + minHorWordPosition); 
-                System.out.println("newWord :" + newWord);                     
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                     
+                if (debugPrint) {
+                    System.out.println("hWordExists at minPositionBoard - 1");                      
+                    System.out.println("minHorWordPosition :" + minHorWordPosition); 
+                    System.out.println("newWord :" + newWord);                     
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore);                    
+                }                  
                 hWordExists = true;                    
             } else if (board.getCell(minPosition - 1).getPositionTaken()) {                
                 minHorWordPosition = minPosition - 1;                
@@ -656,11 +717,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(minHorWordPosition).getHorizontalScore();
                 newWordScore += board.getCell(minHorWordPosition).getHorizontalScore();                    
                 
-                System.out.println("hLetterExists at minPositionBoard - 1"); 
-                System.out.println("minHorWordPosition :" + minHorWordPosition);                     
-                System.out.println("newWord :" + newWord);    
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                    
+                if (debugPrint) {
+                    System.out.println("hLetterExists at minPositionBoard - 1"); 
+                    System.out.println("minHorWordPosition :" + minHorWordPosition);                     
+                    System.out.println("newWord :" + newWord);    
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore);  
+                }                  
                 hWordExists = true;                      
             } else {
                 minHorWordPosition = minPosition;                
@@ -672,8 +735,17 @@ public class ScrabbleGame {
         return hWordExists;
     }
     
+    /**
+     * This is one of 5 helper methods for "scrabbleAlgo" to implement the DRY principle in scrabbleAlgo. 
+     * This method finds all the words, letterOnly scores (for later reference), and the word scores, 
+     * based on the letters for Horizontal max positions chosen by the Player
+     * @param hWord (boolean) : scrabbleAlgo() tells the helper method whether atleast a partial/full horizontal word exists
+     * @param maxPosition (int) : scrabbleAlgo() sends the current max Position for this word, which may change during the course of this algorithm
+     */
     public void scrabbleAlgoHorWordMaxPosHelper(boolean hWord, int maxPosition) {
-        System.out.println("Entering Horizontal Word Max Position Helper");        
+        if (debugPrint) {
+            System.out.println("Entering Horizontal Word Max Position Helper"); 
+        }       
         boolean hWordExists = hWord;
         if ((maxPosition % 15) < 14) {        
             if (board.containsHorizontalWord(maxPosition + 1)) {            
@@ -682,11 +754,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(maxHorWordPosition).getHorizontalScore();
                 newWordScore += board.getCell(maxHorWordPosition).getHorizontalScore();  
                 
-                System.out.println("hWordExists at maxPositionOfBoard + 1");                      
-                System.out.println("maxHorWordPosition :" + maxHorWordPosition); 
-                System.out.println("newWord :" + newWord);                     
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                      
+                if (debugPrint) {
+                    System.out.println("hWordExists at maxPositionOfBoard + 1");                      
+                    System.out.println("maxHorWordPosition :" + maxHorWordPosition); 
+                    System.out.println("newWord :" + newWord);                     
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore); 
+                }                     
                 hWordExists = true;                    
             } else if (board.getCell(maxPosition + 1).getPositionTaken()) {                
                 maxHorWordPosition = maxPosition + 1;                    
@@ -694,11 +768,13 @@ public class ScrabbleGame {
                 newLettersOnlyScore += board.getCell(maxHorWordPosition).getHorizontalScore();
                 newWordScore += board.getCell(maxHorWordPosition).getHorizontalScore();                     
                 
-                System.out.println("hLetterExists at maxPositionOfBoard + 1"); 
-                System.out.println("maxHorWordPosition :" + maxHorWordPosition);                     
-                System.out.println("newWord :" + newWord);   
-                System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
-                System.out.println("newWordScore :" + newWordScore);                     
+                if (debugPrint) {
+                    System.out.println("hLetterExists at maxPositionOfBoard + 1"); 
+                    System.out.println("maxHorWordPosition :" + maxHorWordPosition);                     
+                    System.out.println("newWord :" + newWord);   
+                    System.out.println("newLettersOnlyScore :" + newLettersOnlyScore);   
+                    System.out.println("newWordScore :" + newWordScore); 
+                }                    
                 hWordExists = true;                    
             } else {
                 maxHorWordPosition = maxPosition;                
@@ -711,7 +787,10 @@ public class ScrabbleGame {
             String checkWordHor = newWord.toString();
             newWordsError = !checkWordExists(checkWordHor); // if error, set newWordsError = true;        
             if (!newWordsError) {
-                //if (hWordExists) {
+                if (debugPrint) {
+                    System.out.println("hWordExists : ");              
+                    System.out.println("Setting newLetterOnlyScore : " + newLettersOnlyScore); 
+                }                    
                 board.getCell(minHorWordPosition).setHorizontalWord(newWord.toString());                
                 board.getCell(maxHorWordPosition).setHorizontalWord(newWord.toString());                
                 board.getCell(minHorWordPosition).setHorizontalScore(newLettersOnlyScore);                
@@ -721,14 +800,15 @@ public class ScrabbleGame {
                 currentPlayerWords.add(newWord.toString());                
                 newWordScore = newWordScore * wordMultiplier;
                 newTotalScore += newWordScore;
-                //}
             }
         }
-        System.out.println("New Word Error : " + newWordsError);          
-        System.out.println("Min Horizontal Position of Board for Horizontal Word is : " + minHorWordPosition);
-        System.out.println("Max Horizontal Position of Board for Horizontal Word is : " + maxHorWordPosition);     
-        System.out.println("Horizontal Word for Min Position is : " + board.getCell(minHorWordPosition).getHorizontalWord());
-        System.out.println("Horizontal Word for Max Position is : " + board.getCell(maxHorWordPosition).getHorizontalWord());             
+        if (debugPrint) {
+            System.out.println("New Word Error : " + newWordsError);          
+            System.out.println("Min Horizontal Position of Board for Horizontal Word is : " + minHorWordPosition);
+            System.out.println("Max Horizontal Position of Board for Horizontal Word is : " + maxHorWordPosition);     
+            System.out.println("Horizontal Word for Min Position is : " + board.getCell(minHorWordPosition).getHorizontalWord());
+            System.out.println("Horizontal Word for Max Position is : " + board.getCell(maxHorWordPosition).getHorizontalWord()); 
+        }            
     }        
 
     /**
@@ -736,8 +816,6 @@ public class ScrabbleGame {
      * 'Scrabble'
      */
     public void refillEvent() {
-        // String status; //dummy string. May or may not use it
-        // ArrayList<Letter> trayOfLetters = currentPlayer.getCurrentLetterTray();
         int sizeOfCurrentTray = currentPlayer.getCurrentLetterTray().size();
         boolean refillFullTray = false;
         ArrayList<Letter> newLetters = new ArrayList<Letter>();
@@ -747,24 +825,21 @@ public class ScrabbleGame {
         } else {
             endGame = true;
         }
-
     }
 
     /**
-     * This method displays in the GUI: the Board, score and the status of the
-     * Player with the current Turn.
+     * This method displays in the GUI: the current Board
+     * 
      */
     public ArrayList<Cell[]> getDisplay() {
-        // CurrentPlayerWordScore = 0; //dummyWordScore
-        // CurrentPlayerWords.add("dummyWord1"); //This could be an ArrayList<String>
-        // CurrentPlayerTotalScore = 0; //dummyTotalScore
         display = board.getCurrentBoard();
-        // gameResult();
         return display;
     }
 
+    /**
+     * This method is used to change the Player, after each turn
+     */
     public void changePlayer() {
-        // boolean newPlayersTurn = changePlayer;
         if (playerIndex == (players.size() - 1)) {
             playerIndex = 0;
         } else {
@@ -773,14 +848,15 @@ public class ScrabbleGame {
         currentPlayer = players.get(playerIndex);
     }
 
+    /**
+     * This method is used by the scrabbleAlgo(), and the search button in the Scrabble GUI, to check if a word exists in the dictionary
+     * @param wordList : List of words to check in the Dictionary
+     * @return boolean true of all the words in the list exist in the Dictionary
+     */
     public boolean checkError(ArrayList<String> wordList) {
         boolean newWordsError = false;
-        boolean tempError;
         boolean dictFileInComplete = true;
 
-        // To do: check new words here
-        // while (!newWordsError || dictFileChecked) {
-        // tempError = true;
         boolean wordInDict;
         for (int i = 0; i < wordList.size(); i++) {
             wordInDict = false;
@@ -788,10 +864,8 @@ public class ScrabbleGame {
             // Check if word is in dictionary
             // for (int j = 0; j < dictionaryWords.size(); j ++) {
             int countDict = 0;
-            // while(dictFileInComplete || !tempError) {
             while (dictFileInComplete && !wordInDict) {
                 if (wordList.get(i).equalsIgnoreCase(dictionaryWords.get(countDict))) {
-                    // tempError = false;
                     wordInDict = true;
                 }
                 countDict++;
@@ -799,86 +873,85 @@ public class ScrabbleGame {
                     dictFileInComplete = false;
                 }
             }
-            // }
             if (!wordInDict) {
-                // if (tempError) {
                 newWordsError = true; // So atleast one word from word list is NOT in the dictionary, and hence an
                                       // error
             }
         }
-        // dictFileChecked = true;
         return newWordsError;
     }
 
+    /**
+     * This method is used by the search button in the Scrabble GUI, to check if a word exists in the dictionary
+     * @param wordCheck : List of words to check in the Dictionary
+     * @return boolean true of all the words in the list exist in the Dictionary
+     */
     public boolean checkWordExists(String wordCheck) {
         boolean wordExists = false;
         ArrayList<String> singleWord = new ArrayList<String>();
         singleWord.add(wordCheck);
         wordExists = !checkError(singleWord);
 
-        // If we want the Current Player's score docked a few points each time for
-        // checking the dictionary, use this
+        // OPTIONAL : If we want the Current Player's score docked a few points each time for
+        // checking the dictionary, set dockedPoints to the points that we want docked
         int dockedPoints = 0; // 2; Currently not docking points
         currentPlayer.setTotalScore(currentPlayer.getTotalScore() - dockedPoints);
 
         return wordExists;
     }
 
+    /**
+     * getCurrentPlayer()
+     * @return
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
     /**
-     * This method sends out the scores of each Player from the game to the GUI.
-     * 
+     * getBagOfLetters() isEmpty()
      * @return
      */
-    private void gameResult() {
-        allPlayerScores = scoreKeeper.getPlayerScores();
-    }
-
-    /**
-     * This method determines whether the user will play again.
-     */
-    private void playAgain() {
-        String inputFromGUI = "Play Again"; // dummy String. Needs input from GUI
-        if (inputFromGUI.toLowerCase().equals("play again")) {
-            playing = true;
-        }
-    }
-
-    /**
-     * This method determines whether the user will restart play. Scrabble is a long
-     * game, and is the Players want to restart play, this method can be called to
-     * restart the Scrabble Game
-     */
-    private void restartPlay() {
-        String inputFromGUI = "Restart Play"; // dummy String. Needs input from GUI
-        if (inputFromGUI.toLowerCase().equals("restart play")) {
-            playing = true;
-        }
-    }
-
     public boolean getBagOfLettersIsEmpty() {
         return bagOfLetters.isEmpty();
     }
 
+    /**
+     * getBagOfLetters
+     * @return
+     */
     public BagOfLetters getBagOfLetters() {
         return this.bagOfLetters;
     }
 
+    /**
+     * getBoard()
+     * @return
+     */
     public Board getBoard() {
         return this.board;
     }
 
+    /**
+     * setEndGame()
+     * @param gameStatus
+     */
     public void setEndGame(boolean gameStatus) {
         endGame = gameStatus;
     }
 
+    /**
+     * getGameStatus
+     * @return
+     */
     public boolean getGameStatus() {
         return endGame;
     }
 
+    /**
+     * getNewWordsError : This is the error seen from the scrabbleAlgo()
+     * @return true, if there was an error, or no word in the Dictionary
+     */
     public boolean getNewWordsError() {
         return newWordsError;
     }

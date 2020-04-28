@@ -22,8 +22,7 @@ public class BagOfLetters {
             1, 1, 4, 2, 6, 8, 2, 1, 6, 
             4, 6, 4, 2, 2, 1, 2, 1}; //, 2 };    
     int numLettersToPick;
-    
-    //ArrayList<String> pickOfNewLetters;    
+      
     private boolean bagEmpty;  
     private static Letter newLetter;
     
@@ -48,25 +47,15 @@ public class BagOfLetters {
     //public ArrayList<String> shuffleAndPickLetters(int numLetters) {    
     public ArrayList<Letter> shuffleAndPickLetters(int numLetters) {        
         numLettersToPick = numLetters;
-        ArrayList<Letter> pickOfNewLetters  = new ArrayList<Letter>();
-     /* //Shuffle(); //Already done in Ln-47 using rand fn
-        System.out.println("Num Letters in Bag : " + letters.size());
-        System.out.println("Letter in position 41 : " + letters.get(40).getLetterName());     
-        System.out.println("Letter in position 42 : " + letters.get(41).getLetterName());
-        System.out.println(rand.nextInt(10));
-        int randInt; */       
+        ArrayList<Letter> pickOfNewLetters  = new ArrayList<Letter>();      
         for (int i=0; i < numLetters; i++) {
             if (!bagEmpty) {
-                //randInt = rand.nextInt(letters.size());
-                //Letter newLetter = letters.get(randInt);
+                //Shuffle done here
                 newLetter = this.getCurrentBagOfLetters().get(rand.nextInt(letters.size()));
                 pickOfNewLetters.add(newLetter); //TODO : This needs to be a random letter selection. Need to handle "BLANK" too
-                removeLetter(newLetter);        
-                //currentCard = deck.getCards().get(rand.nextInt(deck.getCards().size()));
-                //deck.removeCard(currentCard);                
+                removeLetter(newLetter);                    
             }          
-        }
-        
+        }        
         return pickOfNewLetters;        
     }   
     
