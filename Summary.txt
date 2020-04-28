@@ -1,4 +1,4 @@
-Team-35-Scrabble-Game
+﻿Team-35-Scrabble-Game
 Gaming is a popular entertainment venture, a lot of gaming currently is being done virtually online. In the cit-591 course, we have had the practice of some of the popular games like BlackjackSolitaire as an assignment, and on a basic level Chess, Snakes and Ladders, etc. We want to build on this expertise and scale higher with new games called Scrabble. In this game, a user (or two users) can access and play against each other. In this game, players will have a game board, 15 by 15 tiles, a letter bag, and seven racks. The rule is player 1 clicks the letter in the rack and then clicks any tile on the board to relocate the letter. Each time the player finishes this round, click the submit button to save the words on board, then it will pass to the other player or next round. The more words player made, the more score the player wins. Each letter has its score and some tiles have bonus effects.
  
 Implementation Method: 
@@ -54,8 +54,15 @@ Implementation Method: 
 2. Build a Gradle project in terminal:   "./gradlew build" for Mac or ".\gradlew build" for PC
 3. Run the project in terminal:  "./gradlew run" for Mac or ".\gradlew run" for PC.
 
+## How to run in Eclipse (Method-1):
+1. Download Scrabble.zip into your desktop
+2. Unzip the folder into you eclipse-workspace
+3. Open eclipse
+4. Select "File" --> Open Projects from File System, and Select the Unzipped "Scrabble" folder
+5. now that the File System has been picked by eclipse and configure, right-click on the "Scrabble" Project, then go to "Gradle", and hit "Refresh Gradle Project"
+6. Please let us know if you run into any issues.
 
-## How to run in Eclipse
+## How to run in Eclipse (Method-2)
 1. Add JavaSE-11.0.7 library.
 Right click on the Scrabble project -> Project -> Properties -> Java Build Path -> Library tab -> Add Library -> JRE System Library ->
 Execution environment -> JavaSE-11.0.7
@@ -74,7 +81,7 @@ You can check how many letters are left in the letter bag by clicking the bag bu
 
 
 Authors
-Shodhan Shetty--Initiated the back-end with the Scrabble algorithm
+Shodhan Shetty--Initiated and completed the back-end of this game, including the Scrabble algorithm
 Daisy Liu--Designed the Project structure and implemented the GUI
 Yugui Chen--Created all the images elements in the GUI and completed all the JUnit test 
 Yugui Chen--Support the GUI design and completed all the JUnit test files
