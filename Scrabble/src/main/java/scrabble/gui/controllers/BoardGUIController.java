@@ -464,9 +464,9 @@ public class BoardGUIController implements Initializable {
             boolean found  = this.helper.searchWord(word);
             System.out.println("Found : " +found);
             if(found)
-                showInfoDialog("Success", "Success : " + word + " is in dictionary.");
+                showInfoDialog("Success", "Success : " + word + " is in the dictionary.");
             else 
-                showInfoDialog("Failed", "Failed : " + word + " is not in dictionary.");
+                showInfoDialog("Failed", "Failed : " + word + " is not in the dictionary.");
         }
     }
 
